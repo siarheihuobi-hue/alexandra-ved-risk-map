@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Карта рисков слепого импорта 2026 — WhiteWayChina</title>
+<meta name="description" content="Интерактивная карта точек потерь при импорте из Китая. Персонализированный инструмент диагностики для предпринимателей.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   ТОКЕНЫ
+═══════════════════════════════════════ */
+:root {
+  --accent:        #597dee;
+  --accent-dark:   #3d5ed4;
+  --accent-light:  #eef1fd;
+  --text:          #1c1c1c;
+  --muted:         #555;
+  --bg:            #ffffff;
+  --bg-soft:       #f9f9f9;
+  --border:        #e4e4e4;
+  --danger:        #e53935;
+  --danger-bg:     rgba(229,57,53,0.08);
+  --warn:          #f57c00;
+  --warn-bg:       rgba(245,124,0,0.08);
+  --ok:            #2e7d32;
+  --ok-bg:         rgba(46,125,50,0.08);
+  --radius:        12px;
+  --shadow:        0 2px 16px rgba(0,0,0,0.07);
+  --col:           860px;
+  --trans:         0.25s ease;
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Open Sans', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h2 { font-size: 1.5rem; font-weight: 700; line-height: 1.3; }
+h3 { font-size: 1.1rem; font-weight: 700; line-height: 1.3; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ═══════════════════════════════════════
+   STICKY HEADER
+═══════════════════════════════════════ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 32px; height: 32px;
+  background: var(--accent);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+
+.logo-text {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  line-height: 1.2;
+}
+.logo-text span { display: block; font-weight: 400; color: var(--muted); font-size: 11px; letter-spacing: 0; }
+
+.header-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 200px;
+  max-width: 340px;
+}
+
+.progress-label {
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.progress-label strong { color: var(--accent); }
+
+.progress-bar-wrap {
+  flex: 1;
+  height: 6px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 99px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+.btn-pdf {
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--trans);
+}
+.btn-pdf:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero {
+  background: linear-gradient(135deg, #f9faff 0%, #eef1fd 60%, #f5f8ff 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 56px 20px 48px;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 99px;
+  background: var(--accent-light);
+  border: 1px solid rgba(89,125,238,0.25);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-dark);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto 16px;
+}
+
+.hero-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  background: rgba(255,255,255,0.8);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+/* ═══════════════════════════════════════
+   СЕКЦИИ
+═══════════════════════════════════════ */
+.section {
+  padding: 48px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section:last-child { border-bottom: none; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.section h2 { margin-bottom: 8px; }
+
+.section-desc {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-bottom: 28px;
+}
+
+/* ═══════════════════════════════════════
+   ПЕРСОНАЛИЗАЦИЯ
+═══════════════════════════════════════ */
+.personalize-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.personalize-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+  .personalize-grid { grid-template-columns: 1fr; }
+}
+
+.field-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 7px;
+  color: var(--text);
+}
+
+.field-select, .field-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--text);
+  transition: border-color var(--trans);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.field-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.field-select:focus, .field-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(89,125,238,0.12);
+}
+
+.risk-result {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: var(--accent-light);
+  border: 1.5px solid rgba(89,125,238,0.25);
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.risk-result-icon { font-size: 20px; flex-shrink: 0; }
+
+.risk-result-text { color: var(--muted); }
+
+.risk-result-text strong {
+  color: var(--accent-dark);
+  font-size: 1rem;
+}
+
+/* ═══════════════════════════════════════
+   КАРТОЧКИ РИСКОВ
+═══════════════════════════════════════ */
+.risks-list { display: flex; flex-direction: column; gap: 12px; }
+
+.risk-card {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--trans), box-shadow var(--trans);
+  background: var(--bg);
+}
+
+.risk-card.is-mine {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px rgba(229,57,53,0.08);
+}
+
+.risk-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--trans);
+}
+
+.risk-card-head:hover { background: var(--bg-soft); }
+
+.risk-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--bg-soft);
+}
+
+.risk-title-wrap { flex: 1; min-width: 0; }
+
+.risk-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.risk-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 99px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.risk-badge.danger { background: var(--danger-bg); color: var(--danger); }
+.risk-badge.warn   { background: var(--warn-bg);   color: var(--warn); }
+.risk-badge.ok     { background: var(--ok-bg);     color: var(--ok); }
+
+.risk-short {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.risk-toggle {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: transform var(--trans), border-color var(--trans), color var(--trans);
+}
+
+.risk-card.open .risk-toggle {
+  transform: rotate(180deg);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.risk-body {
+  display: none;
+  padding: 0 20px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.risk-card.open .risk-body { display: block; }
+
+.risk-cases { margin: 16px 0; }
+
+.risk-cases-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.case-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--bg-soft);
+  margin-bottom: 8px;
+  font-size: 14px;
+  align-items: flex-start;
+}
+
+.case-item::before {
+  content: '—';
+  color: var(--danger);
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+.case-item .case-sum {
+  font-weight: 700;
+  color: var(--danger);
+}
+
+.mechanism-box {
+  padding: 12px 16px;
+  border-left: 3px solid var(--warn);
+  background: var(--warn-bg);
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.mechanism-box b { color: var(--warn); }
+
+.mine-check-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1.5px dashed var(--border);
+  cursor: pointer;
+  transition: all var(--trans);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.mine-check-wrap:hover { border-color: var(--danger); background: var(--danger-bg); }
+
+.mine-check-wrap input[type="checkbox"] {
+  width: 18px; height: 18px;
+  accent-color: var(--danger);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════
+   ЦЕПОЧКА ПОСТАВКИ
+═══════════════════════════════════════ */
+.chain-wrap {
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.chain {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  min-width: max-content;
+}
+
+.chain-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  position: relative;
+}
+
+.chain-node-btn {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--trans);
+  text-align: center;
+}
+
+.chain-node-btn:hover, .chain-node.active .chain-node-btn {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  box-shadow: 0 2px 12px rgba(89,125,238,0.18);
+}
+
+.chain-node-num {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.chain-arrow {
+  font-size: 18px;
+  color: var(--border);
+  padding: 0 4px;
+  flex-shrink: 0;
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+.chain-popup {
+  display: none;
+  margin-top: 16px;
+  padding: 20px;
+  border-radius: var(--radius);
+  background: var(--accent-light);
+  border: 1.5px solid rgba(89,125,238,0.25);
+}
+
+.chain-popup.visible { display: block; }
+
+.chain-popup-title {
+  font-weight: 700;
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+.chain-popup-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 500px) {
+  .chain-popup-grid { grid-template-columns: 1fr; }
+}
+
+.chain-popup-item {}
+.chain-popup-item-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.chain-popup-item-val {
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* ═══════════════════════════════════════
+   ТАБЫ
+═══════════════════════════════════════ */
+.tabs-nav {
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  transition: all var(--trans);
+}
+
+.tab-btn:hover { color: var(--text); background: var(--bg-soft); }
+
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  background: transparent;
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Аккордеон внутри табов */
+.scenario-list { display: flex; flex-direction: column; gap: 8px; }
+
+.scenario-item {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.scenario-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background var(--trans);
+  user-select: none;
+}
+
+.scenario-head:hover { background: var(--bg-soft); }
+
+.scenario-head .s-toggle {
+  font-size: 18px;
+  color: var(--muted);
+  transition: transform var(--trans);
+  flex-shrink: 0;
+}
+
+.scenario-item.open .scenario-head .s-toggle { transform: rotate(180deg); }
+
+.scenario-body {
+  display: none;
+  padding: 0 18px 16px;
+  font-size: 14px;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+.scenario-item.open .scenario-body { display: block; }
+
+.scenario-body p { margin-top: 12px; }
+
+.scenario-body ul {
+  margin: 10px 0 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.scenario-body li { color: var(--muted); }
+
+.scenario-body .s-fine {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: var(--danger-bg);
+  border-radius: 8px;
+  color: var(--danger);
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════
+   ЧЕКЛИСТ
+═══════════════════════════════════════ */
+.checklist-groups { display: flex; flex-direction: column; gap: 24px; }
+
+.checklist-group {}
+
+.checklist-group-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.group-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-left: auto;
+}
+
+.check-items { display: flex; flex-direction: column; gap: 6px; }
+
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  transition: all var(--trans);
+  cursor: pointer;
+}
+
+.check-item:hover { border-color: var(--accent); background: rgba(89,125,238,0.04); }
+
+.check-item.done {
+  background: var(--ok-bg);
+  border-color: rgba(46,125,50,0.3);
+}
+
+.check-item.done .check-text { text-decoration: line-through; color: var(--muted); }
+
+.check-item input[type="checkbox"] {
+  width: 18px; height: 18px;
+  accent-color: var(--ok);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.check-text { font-size: 14px; line-height: 1.5; }
+
+/* ═══════════════════════════════════════
+   СКОР / GAUGE
+═══════════════════════════════════════ */
+.score-section-bg {
+  background: var(--bg-soft);
+  border-radius: var(--radius);
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.gauge-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.gauge-svg { overflow: visible; }
+
+.gauge-track { fill: none; stroke: var(--border); stroke-width: 12; }
+
+.gauge-fill {
+  fill: none;
+  stroke-width: 12;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s ease, stroke 0.4s ease;
+  transform: rotate(-90deg);
+  transform-origin: 60px 60px;
+}
+
+.gauge-pct {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  fill: var(--text);
+}
+
+.gauge-label {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
+  fill: var(--muted);
+}
+
+.score-status {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  transition: color 0.4s;
+}
+
+.score-desc {
+  color: var(--muted);
+  font-size: 0.92rem;
+  max-width: 480px;
+  margin: 0 auto 32px;
+}
+
+.cta-box {
+  background: var(--accent);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  color: #fff;
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.cta-box h3 {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.cta-box p {
+  opacity: 0.88;
+  font-size: 0.92rem;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.btn-cta {
+  display: inline-block;
+  padding: 14px 32px;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--accent-dark);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all var(--trans);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.btn-cta:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  text-decoration: none;
+}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+.site-footer {
+  padding: 28px 20px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  background: var(--bg-soft);
+}
+
+/* ═══════════════════════════════════════
+   АНИМАЦИИ ВХОДА
+═══════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.5s ease both; }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+/* ═══════════════════════════════════════
+   PRINT
+═══════════════════════════════════════ */
+@media print {
+  .site-header, .btn-pdf, .risk-toggle,
+  .mine-check-wrap, .chain-node-btn,
+  .tab-btn, .btn-cta { display: none !important; }
+
+  .risk-body, .scenario-body, .tab-panel { display: block !important; }
+
+  .section { padding: 24px 0; }
+
+  body { font-size: 12px; }
+
+  .chain { flex-wrap: wrap; min-width: unset; }
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 600px) {
+  .hero { padding: 36px 16px 32px; }
+  .section { padding: 36px 16px; }
+  .personalize-card { padding: 20px; }
+  .header-inner { gap: 8px; }
+  .header-progress { min-width: 140px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ STICKY HEADER ═══════ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="logo">
+      <div class="logo-icon">🇨🇳</div>
+      <div class="logo-text">WhiteWayChina<span>Александра Шумилова</span></div>
+    </a>
+    <div class="header-progress">
+      <span class="progress-label">Готовность: <strong id="hdr-count">0/22</strong></span>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="hdr-bar"></div>
+      </div>
+    </div>
+    <button class="btn-pdf" onclick="window.print()">↓ Сохранить PDF</button>
+  </div>
+</header>
+
+<!-- ═══════ HERO ═══════ -->
+<div id="top"></div>
+<section class="hero">
+  <div class="hero-badge fade-up">📋 Ускоритель воркшопа 2026</div>
+  <h1 class="fade-up delay-1">Карта рисков <em>слепого импорта</em> 2026</h1>
+  <p class="hero-sub fade-up delay-2">Структурированная карта точек, где деньги уходят тихо — до того, как вы успеваете это заметить</p>
+  <p class="hero-desc fade-up delay-3">Это не общая памятка. Это ваш персональный инструмент диагностики. Заполните один раз — получите картину рисков конкретно под ваш бизнес.</p>
+</section>
+
+<!-- ═══════ ПЕРСОНАЛИЗАЦИЯ ═══════ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-label">⚙️ Шаг 1</div>
+    <h2>Настройте карту под себя</h2>
+    <p class="section-desc">Суммы потерь пересчитаются автоматически под вашу нишу и размер партии</p>
+
+    <div class="personalize-card fade-up">
+      <div class="personalize-grid">
+        <div>
+          <label class="field-label" for="niche">Ваша ниша</label>
+          <select class="field-select" id="niche" onchange="updatePersonalization()">
+            <option value="1.0">Выберите нишу…</option>
+            <option value="1.2">Электроника / гаджеты</option>
+            <option value="0.9">Одежда / текстиль</option>
+            <option value="1.5">Оборудование / промтовары</option>
+            <option value="1.0">Другое</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label" for="amount">Типичная сумма партии (руб.)</label>
+          <input class="field-input" type="number" id="amount" placeholder="например, 500000" min="0" oninput="updatePersonalization()">
+        </div>
+      </div>
+      <div class="risk-result" id="risk-result" style="display:none;">
+        <div class="risk-result-icon">⚡</div>
+        <div class="risk-result-text">Ваша расчётная зона риска: <strong id="risk-range">—</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ 7 РИСКОВ ═══════ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-label">🔴 Часть 1</div>
+    <h2>7 ситуаций, в которых прибыль «растворяется»</h2>
+    <p class="section-desc">Нажмите на карточку — раскроются реальные кейсы и суммы потерь</p>
+
+    <div class="risks-list" id="risks-list">
+
+      <!-- 1 -->
+      <div class="risk-card" id="rc-0">
+        <div class="risk-card-head" onclick="toggleRisk(0)">
+          <div class="risk-icon">📦</div>
+          <div class="risk-title-wrap">
+            <div class="risk-title">
+              «Образец был идеальным»
+              <span class="risk-badge danger">Очень высокий</span>
+            </div>
+            <div class="risk-short">Серийная партия не совпадает с образцом по качеству</div>
+          </div>
+          <div class="risk-toggle">▼</div>
+        </div>
+        <div class="risk-body">
+          <div class="risk-cases">
+            <div class="risk-cases-title">Реальные случаи</div>
+            <div class="case-item">Беспроводные наушники: время работы 4–6 ч вместо 24 ч, вся партия вернулась с маркетплейса. <span class="case-sum" data-base-min="320000" data-base-max="320000">Потери: ~320&nbsp;000 руб.</span></div>
+            <div class="case-item">Одежда: поставщик заменил 100% хлопок на смесь 60/40. Покупатели снизили рейтинг, карточка упала. <span class="case-sum" data-base-min="150000" data-base-max="400000">Потери: 150&nbsp;000–400&nbsp;000 руб.</span></div>
+            <div class="case-item">Пластиковые контейнеры: толщина стенки снижена с 3 до 2 мм. Партия 50 000 штук — вся с трещинами.</div>
+          </div>
+          <div class="mechanism-box">
+            <b>Механизм потери:</b> По данным QIMA (2022–2024): <b>46% партий</b> из Китая при первой проверке содержат хотя бы один существенный дефект. Обнаружение на складе в России = возврат в Китай стоит дороже самого товара.
+          </div>
+          <label class="mine-check-wrap" onclick="toggleMine(0)">
+            <input type="checkbox" id="mine-0"> Это моя ситуация
+          </label>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="risk-card" id="rc-1">
+        <div class="risk-card-head" onclick="toggleRisk(1)">
+          <div class="risk-icon">🚨</div>
+          <div class="risk-title-wrap">
+            <div class="risk-title">
+              «Поставщик исчез»
+              <span class="risk-badge danger">Высокий</span>
+            </div>
+            <div class="risk-short">Мошенничество, подмена реквизитов, предоплата не вернулась</div>
+          </div>
+          <div class="risk-toggle">▼</div>
+        </div>
+        <div class="risk-body">
+          <div class="risk-cases">
+            <div class="risk-cases-title">Реальные случаи</div>
+            <div class="case-item">Gold Supplier на Alibaba: предоплата $23&nbsp;000. Через 3 недели аккаунт исчез. Alibaba вернул $2&nbsp;100 (Trade Assurance).</div>
+            <div class="case-item">Взлом email рабочего поставщика: мошенники подменили реквизиты. <span class="case-sum" data-base-min="3500000" data-base-max="3500000">Ушло $47&nbsp;000</span> на чужой счёт.</div>
+            <div class="case-item">Агент в Гуанчжоу через рекомендации в чате: собрал предоплату от нескольких клиентов суммарно ~8&nbsp;млн руб., пропал.</div>
+            <div class="case-item">Муляжи вместо 100 смартфонов. <span class="case-sum" data-base-min="1400000" data-base-max="1400000">Потери: ~1&nbsp;400&nbsp;000 руб.</span></div>
+          </div>
+          <div class="mechanism-box">
+            <b>Механизм потери:</b> По данным FBI IC3: BEC (Business Email Compromise) с участием китайских реквизитов — одна из топ-3 схем международного B2B-мошенничества. Средняя потеря: $120&nbsp;000–180&nbsp;000.
+          </div>
+          <label class="mine-check-wrap" onclick="toggleMine(1)">
+            <input type="checkbox" id="mine-1"> Это моя ситуация
+          </label>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="risk-card" id="rc-2">
+        <div class="risk-card-head" onclick="toggleRisk(2)">
+          <div class="risk-icon">🛃</div>
+          <div class="risk-title-wrap">
+            <div class="risk-title">
+              «Таможня пересчитала»
+              <span class="risk-badge danger">Высокий</span>
+            </div>
+            <div class="risk-short">Неверный ТН ВЭД, заниженный инвойс — доначисление + штраф</div>
+          </div>
+          <div class="risk-toggle">▼</div>
+        </div>
+        <div class="risk-body">
+          <div class="risk-cases">
+            <div class="risk-cases-title">Реальные случаи</div>
+            <div class="case-item">Умные часы как «спортивные браслеты»: таможня переклассифицировала. <span class="case-sum">Доначисление + штраф: ~2&nbsp;800&nbsp;000 руб.</span> Груз простоял 6 недель.</div>
+            <div class="case-item">Одежда задекларирована на $12&nbsp;000, ФТС оценила в $38&nbsp;000. <span class="case-sum">Доплата + штраф: ~1&nbsp;900&nbsp;000 руб.</span></div>
+            <div class="case-item">Детские игрушки: превышение фталатов → задержание 4 месяца → уничтожение за счёт импортёра. Потери: ~900&nbsp;000 руб.</div>
+          </div>
+          <div class="mechanism-box">
+            <b>Механизм потери:</b> Хранение на СВХ: 30–150 руб./кг/сутки. Штраф по ст. 16.2 КоАП: 50–200% от стоимости товара. При уголовном деле (ст. 194 УК) — до 12 лет.
+          </div>
+          <label class="mine-check-wrap" onclick="toggleMine(2)">
+            <input type="checkbox" id="mine-2"> Это моя ситуация
+          </label>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="risk-card" id="rc-3">
+        <div class="risk-card-head" onclick="toggleRisk(3)">
+          <div class="risk-icon">🏦</div>
+          <div class="risk-title-wrap">
+            <div class="risk-title">
+              «Банк заблокировал платёж»
+              <span class="risk-badge danger">Высокий</span>
+            </div>
+            <div class="risk-short">115-ФЗ, нерепатриация, зависший перевод через посредников</div>
+          </div>
+          <div class="risk-toggle">▼</div>
+        </div>
+        <div class="risk-body">
+          <div class="risk-cases">
+            <div class="risk-cases-title">Типичные сценарии потерь</div>
+            <div class="case-item">Платёж завис у промежуточного банка-корреспондента: средства заморожены 2–8 недель.</div>
+            <div class="case-item">Банк запросил документы по 115-ФЗ: бизнес простаивает 5–30 дней.</div>
+            <div class="case-item"><span class="case-sum">Штраф за нерепатриацию: 75–100% от суммы перевода</span> — даже если вы пострадавший (ст. 15.25 КоАП).</div>
+            <div class="case-item">Платёжный агент-мошенник: 100% от суммы перевода.</div>
+          </div>
+          <div class="mechanism-box">
+            <b>Механизм потери:</b> После санкций большинство крупных китайских банков ограничили транзакции с Россией. Юаневые переводы с декабря 2023 всё чаще отклоняются. Предприниматели работают через цепочки посредников.
+          </div>
+          <label class="mine-check-wrap" onclick="toggleMine(3)">
+            <input type="checkbox" id="mine-3"> Это моя ситуация
+          </label>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="risk-card" id="rc-4">
+        <div class="risk-card-head" onclick="toggleRisk(4)">
+          <div class="risk-icon">🛒</div>
+          <div class="risk-title-wrap">
+            <div class="risk-title">
+              «Маркетплейс заблокировал карточку»
+              <span class="risk-badge danger">Высокий</span>
+            </div>
+            <div class="risk-short">Документы не прошли проверку, жалоба правообладателя</div>
+          </div>
+          <div class="risk-toggle">▼</div>
+        </div>
+        <div class="risk-body">
+          <div class="risk-cases">
+            <div class="risk-cases-title">Реальные случаи</div>
+            <div class="case-item">Сертификат «куплен», но не прошёл проверку Росаккредитации: штраф WB + блокировка. <span class="case-sum">Потери: ~670&nbsp;000 руб.</span></div>
+            <div class="case-item">Декларация оформлена на другую модификацию: Ozon заблокировал все листинги в пиковый сезон. <span class="case-sum">Потери: ~350&nbsp;000 руб.</span></div>
+            <div class="case-item">300 пар кроссовок-реплик: бренд подал иск. <span class="case-sum">Суд присудил 900&nbsp;000 руб.</span></div>
+          </div>
+          <div class="mechanism-box">
+            <b>Механизм потери:</b> Упущенные продажи за период блокировки + хранение замороженного товара + потеря рейтинга карточки. При обороте 500&nbsp;000 руб/мес — 150–250 тыс. руб. только за период простоя. Восстановление рейтинга: 14–45 дней.
+          </div>
+          <label class="mine-check-wrap" onclick="toggleMine(4)">
+            <input type="checkbox" id="mine-4"> Это моя ситуация
+          </label>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="risk-card" id="rc-5">
+        <div class="risk-card-head" onclick="toggleRisk(5)">
+          <div class="risk-icon">📄</div>
+          <div class="risk-title-wrap">
+            <div class="risk-title">
+              «Документы есть, но не те»
+              <span class="risk-badge danger">Очень высокий</span>
+            </div>
+            <div class="risk-short">Не на то юрлицо, CE вместо ЕАЭС, нет Честного знака</div>
+          </div>
+          <div class="risk-toggle">▼</div>
+        </div>
+        <div class="risk-body">
+          <div class="risk-cases">
+            <div class="risk-cases-title">Реальные последствия</div>
+            <div class="case-item">Штраф по ст. 14.43 КоАП: <span class="case-sum">до 600&nbsp;000 руб.</span> при первом нарушении, до 1&nbsp;000&nbsp;000 руб. при повторном.</div>
+            <div class="case-item">Честный знак — нарушение ст. 15.12 КоАП: <span class="case-sum">50&nbsp;000–300&nbsp;000 руб.</span> + конфискация товара.</div>
+            <div class="case-item">Крупная партия без маркировки → ст. 171.1 УК: до 6 лет лишения свободы.</div>
+          </div>
+          <div class="mechanism-box">
+            <b>Типичные ошибки по категориям:</b> Электроника — CE вместо декларации ЕАЭС. Детские товары — декларация вместо обязательного сертификата. Одежда — нет кодов «Честного знака». БАД — нет СГР Роспотребнадзора.
+          </div>
+          <label class="mine-check-wrap" onclick="toggleMine(5)">
+            <input type="checkbox" id="mine-5"> Это моя ситуация
+          </label>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="risk-card" id="rc-6">
+        <div class="risk-card-head" onclick="toggleRisk(6)">
+          <div class="risk-icon">🚢</div>
+          <div class="risk-title-wrap">
+            <div class="risk-title">
+              «Логистика подвела»
+              <span class="risk-badge warn">Средний</span>
+            </div>
+            <div class="risk-short">Задержка сезонного товара, повреждение груза, перевозчик-мошенник</div>
+          </div>
+          <div class="risk-toggle">▼</div>
+        </div>
+        <div class="risk-body">
+          <div class="risk-cases">
+            <div class="risk-cases-title">Реальные случаи</div>
+            <div class="case-item">Новогодний декор на 2&nbsp;000&nbsp;000 руб.: прибыл 28 декабря. Продан с дисконтом 60%. <span class="case-sum">Потери: ~1&nbsp;200&nbsp;000 руб.</span></div>
+            <div class="case-item">Хрупкая керамика: повреждено 60% при авиадоставке. Перевозчик компенсировал 18&nbsp;000 руб. при потерях ~280&nbsp;000 руб.</div>
+            <div class="case-item">Карго-оператор (сайт-клон): оплата принята, груз не доставлен. <span class="case-sum">Потери: ~650&nbsp;000 руб.</span></div>
+          </div>
+          <div class="mechanism-box">
+            <b>Механизм потери:</b> Стандартные договоры перевозки ограничивают ответственность перевозчика. По инкотермсу FOB — как только товар на борту, риск переходит к покупателю. Без страховки и инспекционного акта — деньги не вернуть.
+          </div>
+          <label class="mine-check-wrap" onclick="toggleMine(6)">
+            <input type="checkbox" id="mine-6"> Это моя ситуация
+          </label>
+        </div>
+      </div>
+
+    </div><!-- /risks-list -->
+  </div>
+</section>
+
+<!-- ═══════ ЦЕПОЧКА ПОСТАВКИ ═══════ -->
+<section class="section" style="background: var(--bg-soft);">
+  <div class="wrap">
+    <div class="section-label">🔗 Часть 2</div>
+    <h2>Где документы «не сходятся»</h2>
+    <p class="section-desc">Нажмите на этап цепочки — увидите что проверяют и где чаще всего возникают проблемы</p>
+
+    <div class="chain-wrap">
+      <div class="chain" id="supply-chain">
+        <div class="chain-node" onclick="showChainNode(0)">
+          <button class="chain-node-btn">ПОСТАВЩИК</button>
+          <div class="chain-node-num">①</div>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-node" onclick="showChainNode(1)">
+          <button class="chain-node-btn">ПРОИЗВОДСТВО</button>
+          <div class="chain-node-num">②</div>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-node" onclick="showChainNode(2)">
+          <button class="chain-node-btn">ИНСПЕКЦИЯ</button>
+          <div class="chain-node-num">③</div>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-node" onclick="showChainNode(3)">
+          <button class="chain-node-btn">ЭКСПОРТ КНР</button>
+          <div class="chain-node-num">④</div>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-node" onclick="showChainNode(4)">
+          <button class="chain-node-btn">ТРАНЗИТ</button>
+          <div class="chain-node-num">⑤</div>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-node" onclick="showChainNode(5)">
+          <button class="chain-node-btn">ТАМОЖНЯ РФ</button>
+          <div class="chain-node-num">⑥</div>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-node" onclick="showChainNode(6)">
+          <button class="chain-node-btn">СКЛАД</button>
+          <div class="chain-node-num">⑦</div>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-node" onclick="showChainNode(7)">
+          <button class="chain-node-btn">МАРКЕТПЛЕЙС</button>
+          <div class="chain-node-num">⑧</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chain-popup" id="chain-popup">
+      <div class="chain-popup-title" id="chain-popup-title"></div>
+      <div class="chain-popup-grid">
+        <div class="chain-popup-item">
+          <div class="chain-popup-item-label">Что проверяют</div>
+          <div class="chain-popup-item-val" id="chain-checks"></div>
+        </div>
+        <div class="chain-popup-item">
+          <div class="chain-popup-item-label">Типичная проблема</div>
+          <div class="chain-popup-item-val" id="chain-problem"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ СЦЕНАРИИ БАНКОВ И МП ═══════ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-label">📋 Часть 3</div>
+    <h2>Что спрашивают банки и маркетплейсы</h2>
+    <p class="section-desc">Конкретные сценарии запросов — чтобы вы не узнали о них в момент блокировки</p>
+
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="switchTab('bank', this)">🏦 Банк</button>
+      <button class="tab-btn" onclick="switchTab('wb', this)">🛍️ Wildberries</button>
+      <button class="tab-btn" onclick="switchTab('ozon', this)">📦 Ozon</button>
+    </div>
+
+    <!-- Банк -->
+    <div class="tab-panel active" id="tab-bank">
+      <div class="scenario-list">
+        <div class="scenario-item">
+          <div class="scenario-head" onclick="toggleScenario(this)">Сценарий А: Первый платёж по контракту <span class="s-toggle">▾</span></div>
+          <div class="scenario-body">
+            <p>Банк запрашивает:</p>
+            <ul>
+              <li>Контракт полностью (все приложения, спецификации)</li>
+              <li>Инвойс с описанием товара</li>
+              <li>КВО (код вида операции по Инструкции ЦБ №181-И)</li>
+              <li>Подтверждение постановки контракта на учёт (если сумма &gt; 3 млн руб.)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="scenario-item">
+          <div class="scenario-head" onclick="toggleScenario(this)">Сценарий Б: Задержка поставки <span class="s-toggle">▾</span></div>
+          <div class="scenario-body">
+            <p>Банк запрашивает: переписку с поставщиком о причинах задержки → доп. соглашение о переносе сроков → претензию к поставщику.</p>
+            <p>Срок ответа: 7–15 рабочих дней.</p>
+            <div class="s-fine">Штраф при отсутствии документов: 40&nbsp;000–50&nbsp;000 руб. за каждый факт нарушения</div>
+          </div>
+        </div>
+        <div class="scenario-item">
+          <div class="scenario-head" onclick="toggleScenario(this)">Сценарий В: Подозрительная операция (115-ФЗ) <span class="s-toggle">▾</span></div>
+          <div class="scenario-body">
+            <p>Банк запрашивает: контракт, инвойс, переписку, источник происхождения средств, объяснение деловой цели.</p>
+            <p>Срок рассмотрения: 5–30 дней. Операция может быть заблокирована до выяснения.</p>
+          </div>
+        </div>
+        <div class="scenario-item">
+          <div class="scenario-head" onclick="toggleScenario(this)">Сценарий Г: Нерепатриация валюты <span class="s-toggle">▾</span></div>
+          <div class="scenario-body">
+            <p>Товар не поставлен, поставщик не вернул аванс. Банк автоматически фиксирует нарушение.</p>
+            <div class="s-fine">Штраф по ст. 15.25 КоАП: 75–100% от суммы незачисленных средств — даже если вы пострадавший</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WB -->
+    <div class="tab-panel" id="tab-wb">
+      <div class="scenario-list">
+        <div class="scenario-item">
+          <div class="scenario-head" onclick="toggleScenario(this)">При загрузке карточки <span class="s-toggle">▾</span></div>
+          <div class="scenario-body">
+            <p>Обязательно: декларация соответствия или сертификат, внесённые в реестр Росаккредитации (fsa.gov.ru). Маркетплейс проверяет автоматически по номеру документа.</p>
+          </div>
+        </div>
+        <div class="scenario-item">
+          <div class="scenario-head" onclick="toggleScenario(this)">При проверке категории <span class="s-toggle">▾</span></div>
+          <div class="scenario-body">
+            <p>WB запрашивает: все документы по карточке + инвойс поставщика. Карточка скрывается на время проверки.</p>
+            <div class="s-fine">Период заморозки: 3–45 дней. Товар на складе FBO продолжает генерировать расходы.</div>
+          </div>
+        </div>
+        <div class="scenario-item">
+          <div class="scenario-head" onclick="toggleScenario(this)">При жалобе правообладателя <span class="s-toggle">▾</span></div>
+          <div class="scenario-body">
+            <p>Блокировка за 24–48 часов без предупреждения. Требуется: лицензионный договор или письмо-разрешение от правообладателя.</p>
+            <div class="s-fine">Разблокировка: 14–60 дней. Минимальная компенсация по ст. 1301 ГК: 10&nbsp;000 руб. за единицу</div>
+          </div>
+        </div>
+        <div class="scenario-item">
+          <div class="scenario-head" onclick="toggleScenario(this)">Маркировка «Честный знак» <span class="s-toggle">▾</span></div>
+          <div class="scenario-body">
+            <p>С 2024 — автоматическая проверка при приёмке на FBO. Коды должны быть нанесены до поступления на склад.</p>
+            <div class="s-fine">Без кодов: отказ в приёмке + штраф по ст. 15.12 КоАП</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ozon -->
+    <div class="tab-panel" id="tab-ozon">
+      <div class="scenario-list">
+        <div class="scenario-item">
+          <div class="scenario-head" onclick="toggleScenario(this)">При первой поставке <span class="s-toggle">▾</span></div>
+          <div class="scenario-body">
+            <p>Ozon запрашивает: декларацию/сертификат соответствия на ваше юрлицо. Проверка через реестр Росаккредитации — автоматически.</p>
+          </div>
+        </div>
+        <div class="scenario-item">
+          <div class="scenario-head" onclick="toggleScenario(this)">При обновлении карточки <span class="s-toggle">▾</span></div>
+          <div class="scenario-body">
+            <p>Документы могут быть запрошены повторно даже при незначительных изменениях в листинге. Карточка скрывается до подтверждения.</p>
+          </div>
+        </div>
+        <div class="scenario-item">
+          <div class="scenario-head" onclick="toggleScenario(this)">Штрафы по оферте <span class="s-toggle">▾</span></div>
+          <div class="scenario-body">
+            <p>При подтверждённом нарушении: удержание из выплат + блокировка аккаунта до выяснения обстоятельств.</p>
+            <div class="s-fine">После разблокировки карточка теряет позиции: алгоритм учитывает конверсию за период простоя. Восстановление: 14–45 дней.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ЧЕКЛИСТ ═══════ -->
+<section class="section" style="background: var(--bg-soft);">
+  <div class="wrap">
+    <div class="section-label">✅ Часть 4</div>
+    <h2>Чеклист готовности</h2>
+    <p class="section-desc">Отметьте то, что уже сделано — прогресс сохраняется автоматически</p>
+
+    <div class="checklist-groups">
+
+      <div class="checklist-group">
+        <div class="checklist-group-title">💰 До первой оплаты поставщику <span class="group-count" id="gc-0">0/4</span></div>
+        <div class="check-items" id="cg-0">
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c0"> <span class="check-text">Проверить юрлицо поставщика в реестре gsxt.gov.cn (название, дата регистрации, статус)</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c1"> <span class="check-text">Убедиться, что scope деятельности в Business License включает производство, а не только торговлю</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c2"> <span class="check-text">Верифицировать реквизиты голосовым звонком по номеру из независимого источника (не из email)</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c3"> <span class="check-text">Структура оплаты: не более 30% предоплаты при первой сделке с новым поставщиком</span></label>
+        </div>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-group-title">🏭 До начала производства <span class="group-count" id="gc-1">0/3</span></div>
+        <div class="check-items" id="cg-1">
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c4"> <span class="check-text">Подписан Tech Pack / Product Specification Sheet с допусками на все параметры</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c5"> <span class="check-text">Golden Sample — эталонный образец с подписью и печатью, хранится у обеих сторон</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c6"> <span class="check-text">Заказаны коды маркировки «Честный знак» (за 3–4 недели до отгрузки) — если товар в категории обязательной маркировки</span></label>
+        </div>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-group-title">🚢 До отгрузки из Китая <span class="group-count" id="gc-2">0/5</span></div>
+        <div class="check-items" id="cg-2">
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c7"> <span class="check-text">Pre-Shipment Inspection (PSI) — акт независимой инспекционной компании (SGS, Bureau Veritas, CCIC, QIMA). Стоимость: $300–500</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c8"> <span class="check-text">Полный пакет документов: коносамент/авианакладная/CMR → коммерческий инвойс → упаковочный лист → сертификат происхождения</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c9"> <span class="check-text">Для EXW: есть китайский агент, способный провести экспортное оформление</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c10"> <span class="check-text">Страховка груза с указанием реальной стоимости товара</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c11"> <span class="check-text">Контракт зарегистрирован в банке (УНК), если сумма &gt; 3 млн руб.</span></label>
+        </div>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-group-title">🛃 До таможенного оформления <span class="group-count" id="gc-3">0/5</span></div>
+        <div class="check-items" id="cg-3">
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c12"> <span class="check-text">Правильный код ТН ВЭД — при сомнении: предварительное классификационное решение ФТС (бесплатно, срок до 60 дней)</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c13"> <span class="check-text">Таможенная стоимость = реальной стоимости сделки (соответствие платёжных документов инвойсу)</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c14"> <span class="check-text">Электроника: декларация ТР ТС 004/2011 + ТР ТС 020/2011 из аккредитованного органа ЕАЭС</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c15"> <span class="check-text">Детские товары: сертификат ТР ТС 007/2011 (не декларация!)</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c16"> <span class="check-text">БАД: СГР Роспотребнадзора (оформляется 1–3 месяца — нужно планировать заранее)</span></label>
+        </div>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-group-title">🛒 До листинга на маркетплейсе <span class="group-count" id="gc-4">0/5</span></div>
+        <div class="check-items" id="cg-4">
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c17"> <span class="check-text">Декларация/сертификат соответствия оформлены на ваше юрлицо (не на поставщика, не на третью компанию)</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c18"> <span class="check-text">Документ внесён в реестр Росаккредитации (fsa.gov.ru) — маркетплейс проверяет автоматически</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c19"> <span class="check-text">Маркировка товара на русском языке: состав, производитель, способ применения</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c20"> <span class="check-text">Коды «Честного знака» нанесены до поступления на склад маркетплейса</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c21"> <span class="check-text">Проверка торговой марки в базе Роспатента — убедиться, что товар/логотип/дизайн не зарегистрированы другим</span></label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ СКОР ═══════ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-label">📊 Итог</div>
+    <h2>Ваш уровень готовности</h2>
+    <p class="section-desc">Рассчитывается автоматически на основе чеклиста выше</p>
+
+    <div class="score-section-bg">
+      <div class="gauge-wrap">
+        <svg class="gauge-svg" width="120" height="120" viewBox="0 0 120 120">
+          <circle class="gauge-track" cx="60" cy="60" r="50"/>
+          <circle class="gauge-fill" id="gauge-arc" cx="60" cy="60" r="50"
+            stroke-dasharray="314"
+            stroke-dashoffset="314"
+            stroke="var(--accent)"/>
+          <text class="gauge-pct" x="60" y="65" text-anchor="middle" id="gauge-pct-text">0%</text>
+          <text class="gauge-label" x="60" y="80" text-anchor="middle">готовность</text>
+        </svg>
+      </div>
+
+      <div class="score-status" id="score-status">Начните с чеклиста выше</div>
+      <p class="score-desc" id="score-desc">Отметьте выполненные пункты — здесь появится ваша оценка готовности к импорту без потерь.</p>
+
+      <div class="cta-box">
+        <h3>Готовы выстроить систему?</h3>
+        <p>Карта показала, где риски. Флагман даёт инструменты, чтобы они больше не повторялись — на каждой поставке, без ручного контроля.</p>
+        <button class="btn-cta" onclick="showDemoNote()">Узнать о курсе →</button>
+      </div>
+
+      <!-- Demo popup -->
+      <div id="demo-overlay" onclick="hideDemoNote()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:999;align-items:center;justify-content:center;">
+        <div onclick="event.stopPropagation()" style="background:#fff;border-radius:16px;padding:32px 28px;max-width:420px;width:90%;text-align:left;box-shadow:0 8px 40px rgba(0,0,0,0.18);">
+          <div style="font-size:22px;margin-bottom:12px;">👆 Это демо-версия</div>
+          <p style="font-size:15px;line-height:1.6;color:#1c1c1c;margin-bottom:10px;"><strong>В рабочей версии</strong> эта кнопка переводит пользователя на страницу оффера флагманского курса.</p>
+          <p style="font-size:14px;color:#555;line-height:1.6;margin-bottom:20px;">Логика воронки: участник проходит чеклист → видит свои риски → понимает, что нужна система → переходит на оффер флагмана и оформляет участие.</p>
+          <button onclick="hideDemoNote()" style="padding:10px 24px;border-radius:8px;border:none;background:#597dee;color:#fff;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;">Понятно</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="site-footer">
+  <p>Карта составлена на основе анализа реальных случаев: vc.ru, ВЭД-сообщества, арбитражные решения (kad.arbitr.ru), данные QIMA, FBI IC3, публикации ФТС. Актуально: февраль 2026.</p>
+  <p style="margin-top:8px;">© 2026 WhiteWayChina · Александра Шумилова · <a href="https://t.me/shumilovachina">@shumilovachina</a></p>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════
+   ДАННЫЕ ЦЕПОЧКИ ПОСТАВКИ
+═══════════════════════════════════════ */
+const CHAIN_DATA = [
+  { title: '① Поставщик', checks: 'Юрлицо, лицензии, история поставок', problem: 'Посредник вместо производителя; фиктивная компания' },
+  { title: '② Производство', checks: 'Соответствие образцу, материалы, технология', problem: 'Подмена материалов без уведомления в серийной партии' },
+  { title: '③ Инспекция', checks: 'Инспекционный акт, соответствие спецификации', problem: 'Инспекция пропущена → нет документальных оснований для претензии' },
+  { title: '④ Экспорт КНР', checks: 'Экспортная декларация Китая', problem: 'EXW без агента → неполный пакет документов для РФ' },
+  { title: '⑤ Транзит / Логистика', checks: 'Страховка, договор перевозки', problem: 'Ответственность перевозчика ≠ реальная стоимость товара' },
+  { title: '⑥ Таможня РФ', checks: 'ТН ВЭД, таможенная стоимость, разрешительные документы', problem: 'Неверный код → доначисление; занижение стоимости → штраф' },
+  { title: '⑦ Склад / Маркировка', checks: '«Честный знак», маркировка на русском', problem: 'Отсутствие кодов до поступления на склад маркетплейса' },
+  { title: '⑧ Маркетплейс', checks: 'Декларации, сертификаты, права на товарный знак', problem: '«Купленные» документы не проходят проверку реестра Росаккредитации' },
+];
+
+/* ═══════════════════════════════════════
+   ПЕРСОНАЛИЗАЦИЯ
+═══════════════════════════════════════ */
+function fmt(n) {
+  return Math.round(n).toLocaleString('ru-RU') + '\u00a0руб.';
+}
+
+function updatePersonalization() {
+  const niche  = parseFloat(document.getElementById('niche').value) || 1.0;
+  const amount = parseFloat(document.getElementById('amount').value) || 0;
+
+  const resultEl = document.getElementById('risk-result');
+  const rangeEl  = document.getElementById('risk-range');
+
+  if (amount > 0) {
+    const minRisk = amount * 0.15 * niche;
+    const maxRisk = amount * 1.5  * niche;
+    rangeEl.textContent = fmt(minRisk) + ' — ' + fmt(maxRisk);
+    resultEl.style.display = 'flex';
+  } else {
+    resultEl.style.display = 'none';
+  }
+
+  // Пересчёт сумм в кейсах
+  document.querySelectorAll('.case-sum[data-base-min]').forEach(el => {
+    const bMin = parseInt(el.dataset.baseMin);
+    const bMax = parseInt(el.dataset.baseMax);
+    const adj  = amount > 0 ? (amount / 500000) * niche : 1;
+    const calc = adj > 0.2 ? adj : 1;
+    if (bMin === bMax) {
+      el.textContent = 'Потери: ~' + fmt(bMin * calc);
+    } else {
+      el.textContent = 'Потери: ' + fmt(bMin * calc) + ' — ' + fmt(bMax * calc);
+    }
+  });
+}
+
+/* ═══════════════════════════════════════
+   АККОРДЕОН РИСКОВ
+═══════════════════════════════════════ */
+function toggleRisk(idx) {
+  const card = document.getElementById('rc-' + idx);
+  card.classList.toggle('open');
+}
+
+function toggleMine(idx) {
+  const cb   = document.getElementById('mine-' + idx);
+  const card = document.getElementById('rc-' + idx);
+  // Состояние cb уже переключилось (лейбл кликнули)
+  // Используем setTimeout чтобы прочитать после события
+  setTimeout(() => {
+    if (cb.checked) {
+      card.classList.add('is-mine');
+    } else {
+      card.classList.remove('is-mine');
+    }
+  }, 0);
+}
+
+/* ═══════════════════════════════════════
+   ЦЕПОЧКА ПОСТАВКИ
+═══════════════════════════════════════ */
+let activeChainNode = -1;
+
+function showChainNode(idx) {
+  const nodes  = document.querySelectorAll('#supply-chain .chain-node');
+  const popup  = document.getElementById('chain-popup');
+  const title  = document.getElementById('chain-popup-title');
+  const checks = document.getElementById('chain-checks');
+  const prob   = document.getElementById('chain-problem');
+  const data   = CHAIN_DATA[idx];
+
+  if (activeChainNode === idx) {
+    nodes.forEach(n => n.classList.remove('active'));
+    popup.classList.remove('visible');
+    activeChainNode = -1;
+    return;
+  }
+
+  nodes.forEach(n => n.classList.remove('active'));
+  nodes[idx].classList.add('active');
+  activeChainNode = idx;
+
+  title.textContent  = data.title;
+  checks.textContent = data.checks;
+  prob.textContent   = data.problem;
+  popup.classList.add('visible');
+}
+
+/* ═══════════════════════════════════════
+   ТАБЫ
+═══════════════════════════════════════ */
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+}
+
+/* ═══════════════════════════════════════
+   АККОРДЕОН СЦЕНАРИЕВ
+═══════════════════════════════════════ */
+function toggleScenario(head) {
+  const item = head.parentElement;
+  item.classList.toggle('open');
+}
+
+/* ═══════════════════════════════════════
+   ЧЕКЛИСТ + ПРОГРЕСС + СКОР
+═══════════════════════════════════════ */
+const TOTAL = 22;
+const GROUP_SIZES = [4, 3, 5, 5, 5];
+
+function loadChecks() {
+  document.querySelectorAll('.check-items input[type="checkbox"]').forEach(cb => {
+    const key = cb.dataset.key;
+    if (localStorage.getItem('risk2026_' + key) === '1') {
+      cb.checked = true;
+      cb.closest('.check-item').classList.add('done');
+    }
+  });
+  updateProgress();
+}
+
+function toggleCheck(label) {
+  setTimeout(() => {
+    const cb  = label.querySelector('input[type="checkbox"]');
+    const key = cb.dataset.key;
+    if (cb.checked) {
+      label.classList.add('done');
+      localStorage.setItem('risk2026_' + key, '1');
+    } else {
+      label.classList.remove('done');
+      localStorage.removeItem('risk2026_' + key);
+    }
+    updateProgress();
+  }, 0);
+}
+
+function updateProgress() {
+  const checked = document.querySelectorAll('.check-items input[type="checkbox"]:checked').length;
+  const pct     = Math.round((checked / TOTAL) * 100);
+
+  // Header
+  document.getElementById('hdr-count').textContent = checked + '/' + TOTAL;
+  document.getElementById('hdr-bar').style.width   = pct + '%';
+
+  // Group counts
+  let gi = 0;
+  for (let g = 0; g < 5; g++) {
+    const groupChecked = document.querySelectorAll('#cg-' + g + ' input:checked').length;
+    document.getElementById('gc-' + g).textContent = groupChecked + '/' + GROUP_SIZES[g];
+  }
+
+  // Gauge
+  const circ  = 2 * Math.PI * 50; // 314.16
+  const offset = circ - (circ * pct / 100);
+  const arc   = document.getElementById('gauge-arc');
+  arc.style.strokeDashoffset = offset;
+
+  // Цвет gauge
+  let col;
+  if (pct <= 30)       col = '#e53935';
+  else if (pct <= 70)  col = '#f57c00';
+  else                 col = '#2e7d32';
+  arc.style.stroke = col;
+
+  document.getElementById('gauge-pct-text').textContent = pct + '%';
+
+  // Статус
+  const statusEl = document.getElementById('score-status');
+  const descEl   = document.getElementById('score-desc');
+  statusEl.style.color = col;
+
+  if (pct === 0) {
+    statusEl.textContent = 'Начните с чеклиста выше';
+    descEl.textContent   = 'Отметьте выполненные пункты — здесь появится ваша оценка готовности к импорту без потерь.';
+  } else if (pct <= 30) {
+    statusEl.textContent = '🔴 Зона высокого риска';
+    descEl.textContent   = 'Большинство точек потерь не закрыты. Каждая поставка — это неконтролируемый риск. Рекомендуем системный подход.';
+  } else if (pct <= 70) {
+    statusEl.textContent = '🟡 Частичная готовность';
+    descEl.textContent   = 'Есть прогресс, но критические зоны остаются открытыми. Одна непредвиденная ситуация может перечеркнуть результат нескольких поставок.';
+  } else {
+    statusEl.textContent = '🟢 Хорошая готовность';
+    descEl.textContent   = 'Основные риски под контролем. Следующий шаг — выстроить систему так, чтобы контроль не зависел от вашего ручного участия в каждой сделке.';
+  }
+}
+
+/* ═══════════════════════════════════════
+   ИНИТ
+═══════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', function() {
+  loadChecks();
+});
+
+function showDemoNote() {
+  const el = document.getElementById('demo-overlay');
+  el.style.display = 'flex';
+}
+
+function hideDemoNote() {
+  document.getElementById('demo-overlay').style.display = 'none';
+}
+</script>
+</body>
+</html>
