@@ -24,6 +24,35 @@
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/102625647" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika -->
+<script>
+(function(){
+  var PWD = 'VeDCHiNa_p1.0';
+  if(localStorage.getItem('riskmap_auth') !== PWD){
+    document.addEventListener('DOMContentLoaded', function(){
+      document.body.innerHTML = '<div id="pw-gate" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f5f6fa;font-family:\'Open Sans\',sans-serif;">'
+        + '<div style="background:#fff;border-radius:12px;padding:48px 40px;max-width:380px;width:90%;text-align:center;box-shadow:0 4px 32px rgba(0,0,0,0.10);">'
+        + '<div style="font-size:28px;margin-bottom:8px;">🔒</div>'
+        + '<h2 style="font-size:20px;font-weight:700;color:#1c1c1c;margin:0 0 8px;">Закрытый инструмент</h2>'
+        + '<p style="font-size:14px;color:#666;margin:0 0 28px;line-height:1.6;">Карта рисков доступна участникам курса.<br>Введите пароль из вашего кабинета.</p>'
+        + '<input id="pw-input" type="password" placeholder="Пароль" style="width:100%;box-sizing:border-box;padding:12px 16px;border:1.5px solid #ddd;border-radius:8px;font-size:15px;outline:none;margin-bottom:12px;">'
+        + '<div id="pw-error" style="color:#e53935;font-size:13px;margin-bottom:10px;min-height:18px;"></div>'
+        + '<button onclick="checkPwd()" style="width:100%;padding:13px;background:#597dee;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;">Войти →</button>'
+        + '</div></div>';
+    });
+    window.checkPwd = function(){
+      var val = document.getElementById('pw-input').value;
+      if(val === PWD){
+        localStorage.setItem('riskmap_auth', PWD);
+        location.reload();
+      } else {
+        document.getElementById('pw-error').textContent = 'Неверный пароль. Проверьте и попробуйте снова.';
+        document.getElementById('pw-input').style.borderColor = '#e53935';
+      }
+    };
+    document.addEventListener('keydown', function(e){ if(e.key==='Enter') window.checkPwd && window.checkPwd(); });
+  }
+})();
+</script>
 <style>
 /* ═══════════════════════════════════════
    ТОКЕНЫ
