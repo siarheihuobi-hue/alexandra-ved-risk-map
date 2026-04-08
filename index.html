@@ -1144,7 +1144,7 @@ a:hover { text-decoration: underline; }
             <div class="risk-cases-title">Реальные случаи</div>
             <div class="case-item">Беспроводные наушники: время работы 4–6 ч вместо 24 ч, вся партия вернулась с маркетплейса. <span class="case-sum" data-base-min="320000" data-base-max="320000">Потери: ~320&nbsp;000 руб.</span></div>
             <div class="case-item">Одежда: поставщик заменил 100% хлопок на смесь 60/40. Покупатели снизили рейтинг, карточка упала. <span class="case-sum" data-base-min="150000" data-base-max="400000">Потери: 150&nbsp;000–400&nbsp;000 руб.</span></div>
-            <div class="case-item">Пластиковые контейнеры: толщина стенки снижена с 3 до 2 мм. Партия 50 000 штук — вся с трещинами.</div>
+            <div class="case-item">Пластиковые контейнеры: толщина стенки снижена с 3 до 2 мм. Партия 50 000 штук — вся с трещинами. <span class="case-sum" data-base-min="600000" data-base-max="900000">Потери: 600–900 тыс. руб.</span></div>
           </div>
           <div class="mechanism-box">
             <b>Механизм потери:</b> По данным QIMA (2022–2024): <b>46% партий</b> из Китая при первой проверке содержат хотя бы один существенный дефект. Обнаружение на складе в России = возврат в Китай стоит дороже самого товара.
@@ -1203,7 +1203,7 @@ a:hover { text-decoration: underline; }
             <div class="risk-cases-title">Реальные случаи</div>
             <div class="case-item">Умные часы как «спортивные браслеты»: таможня переклассифицировала. <span class="case-sum">Доначисление + штраф: ~2&nbsp;800&nbsp;000 руб.</span> Груз простоял 6 недель.</div>
             <div class="case-item">Одежда задекларирована на $12&nbsp;000, ФТС оценила в $38&nbsp;000. <span class="case-sum">Доплата + штраф: ~1&nbsp;900&nbsp;000 руб.</span></div>
-            <div class="case-item">Детские игрушки: превышение фталатов → задержание 4 месяца → уничтожение за счёт импортёра. Потери: ~900&nbsp;000 руб.</div>
+            <div class="case-item">Детские игрушки: не оформили СГР до отгрузки → товар не выпустили с таможни. Оформление СГР заняло 5 месяцев, всё это время товар на СВХ. Потери: ~900&nbsp;000 руб.</div>
           </div>
           <div class="mechanism-box">
             <b>Механизм потери:</b> Хранение на СВХ: 30–150 руб./кг/сутки. Штраф по ст. 16.2 КоАП: 50–200% от стоимости товара. При уголовном деле (ст. 194 УК) — до 12 лет.
@@ -1340,7 +1340,7 @@ a:hover { text-decoration: underline; }
   <div class="wrap">
     <div class="section-label">🔗 Часть 2</div>
     <h2>Где документы «не сходятся»</h2>
-    <p class="section-desc">Нажмите на этап цепочки — увидите что проверяют и где чаще всего возникают проблемы</p>
+    <p class="section-desc">Нажмите на этап цепочки — увидите что проверяется на каждом этапе и где чаще всего возникают проблемы</p>
 
     <div class="chain-wrap">
       <div class="chain" id="supply-chain">
@@ -1425,8 +1425,6 @@ a:hover { text-decoration: underline; }
             <ul>
               <li>Контракт полностью (все приложения, спецификации)</li>
               <li>Инвойс с описанием товара</li>
-              <li>КВО (код вида операции по Инструкции ЦБ №181-И)</li>
-              <li>Подтверждение постановки контракта на учёт (если сумма &gt; 3 млн руб.)</li>
             </ul>
           </div>
         </div>
@@ -1518,7 +1516,7 @@ a:hover { text-decoration: underline; }
 <!-- ═══════ ЧЕКЛИСТ ═══════ -->
 <section class="section" style="background: var(--bg-soft);">
   <div class="wrap">
-    <div class="section-label">✅ Часть 4</div>
+    <div class="section-label">✅ Часть 4 — Чеклист готовности</div>
     <h2>Чеклист готовности</h2>
     <p class="section-desc">Отметьте то, что уже сделано — прогресс сохраняется автоматически</p>
 
@@ -1528,8 +1526,8 @@ a:hover { text-decoration: underline; }
         <div class="checklist-group-title">💰 До первой оплаты поставщику <span class="group-count" id="gc-0">0/4</span></div>
         <div class="check-items" id="cg-0">
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c0"> <span class="check-text">Проверить юрлицо поставщика в реестре gsxt.gov.cn (название, дата регистрации, статус)</span></label>
-          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c1"> <span class="check-text">Убедиться, что scope деятельности в Business License включает производство, а не только торговлю</span></label>
-          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c2"> <span class="check-text">Верифицировать реквизиты голосовым звонком по номеру из независимого источника (не из email)</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c1"> <span class="check-text">Убедиться, что scope деятельности в Business License включает производство, а не только торговлю (проверяется, только если поставщик заявил, что является производителем)</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c2"> <span class="check-text">Согласовать платёжные реквизиты между банками плательщика и получателя</span></label>
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c3"> <span class="check-text">Структура оплаты: не более 30% предоплаты при первой сделке с новым поставщиком</span></label>
         </div>
       </div>
@@ -1544,13 +1542,12 @@ a:hover { text-decoration: underline; }
       </div>
 
       <div class="checklist-group">
-        <div class="checklist-group-title">🚢 До отгрузки из Китая <span class="group-count" id="gc-2">0/5</span></div>
+        <div class="checklist-group-title">🚢 До отгрузки из Китая <span class="group-count" id="gc-2">0/4</span></div>
         <div class="check-items" id="cg-2">
-          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c7"> <span class="check-text">Pre-Shipment Inspection (PSI) — акт независимой инспекционной компании (SGS, Bureau Veritas, CCIC, QIMA). Стоимость: $300–500</span></label>
-          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c8"> <span class="check-text">Полный пакет документов: коносамент/авианакладная/CMR → коммерческий инвойс → упаковочный лист → сертификат происхождения</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c7"> <span class="check-text">Pre-Shipment Inspection (PSI) — акт независимой инспекционной компании (SGS, Bureau Veritas, CCIC, QIMA) либо отправка инспектора на фабрику до отгрузки. Стоимость: $300–500</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c8"> <span class="check-text">Полный пакет документов: коносамент/авианакладная/CMR → коммерческий инвойс → упаковочный лист → экспортная декларация</span></label>
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c9"> <span class="check-text">Для EXW: есть китайский агент, способный провести экспортное оформление</span></label>
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c10"> <span class="check-text">Страховка груза с указанием реальной стоимости товара</span></label>
-          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c11"> <span class="check-text">Контракт зарегистрирован в банке (УНК), если сумма &gt; 3 млн руб.</span></label>
         </div>
       </div>
 
@@ -1561,7 +1558,7 @@ a:hover { text-decoration: underline; }
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c13"> <span class="check-text">Таможенная стоимость = реальной стоимости сделки (соответствие платёжных документов инвойсу)</span></label>
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c14"> <span class="check-text">Электроника: декларация ТР ТС 004/2011 + ТР ТС 020/2011 из аккредитованного органа ЕАЭС</span></label>
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c15"> <span class="check-text">Детские товары: сертификат ТР ТС 007/2011 (не декларация!)</span></label>
-          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c16"> <span class="check-text">БАД: СГР Роспотребнадзора (оформляется 1–3 месяца — нужно планировать заранее)</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c16"> <span class="check-text">БАД: СГР Роспотребнадзора (оформляется 4–6 месяцев — нужно планировать заранее)</span></label>
         </div>
       </div>
 
@@ -1571,7 +1568,7 @@ a:hover { text-decoration: underline; }
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c17"> <span class="check-text">Декларация/сертификат соответствия оформлены на ваше юрлицо (не на поставщика, не на третью компанию)</span></label>
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c18"> <span class="check-text">Документ внесён в реестр Росаккредитации (fsa.gov.ru) — маркетплейс проверяет автоматически</span></label>
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c19"> <span class="check-text">Маркировка товара на русском языке: состав, производитель, способ применения</span></label>
-          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c20"> <span class="check-text">Коды «Честного знака» нанесены до поступления на склад маркетплейса</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c20"> <span class="check-text">Коды «Честного знака» нанесены до отгрузки из Китая</span></label>
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c21"> <span class="check-text">Проверка торговой марки в базе Роспатента — убедиться, что товар/логотип/дизайн не зарегистрированы другим</span></label>
         </div>
       </div>
@@ -1632,12 +1629,12 @@ a:hover { text-decoration: underline; }
    ДАННЫЕ ЦЕПОЧКИ ПОСТАВКИ
 ═══════════════════════════════════════ */
 const CHAIN_DATA = [
-  { title: '① Поставщик', checks: 'Юрлицо, лицензии, история поставок', problem: 'Посредник вместо производителя; фиктивная компания' },
+  { title: '① Поставщик', checks: 'Юрлицо, лицензии, экспортная лицензия', problem: 'Посредник вместо производителя; фиктивная компания' },
   { title: '② Производство', checks: 'Соответствие образцу, материалы, технология', problem: 'Подмена материалов без уведомления в серийной партии' },
   { title: '③ Инспекция', checks: 'Инспекционный акт, соответствие спецификации', problem: 'Инспекция пропущена → нет документальных оснований для претензии' },
-  { title: '④ Экспорт КНР', checks: 'Экспортная декларация Китая', problem: 'EXW без агента → неполный пакет документов для РФ' },
+  { title: '④ Экспорт КНР', checks: 'Экспортная декларация Китая', problem: 'Покупные документы для экспорта → отсутствует экспортная декларация' },
   { title: '⑤ Транзит / Логистика', checks: 'Страховка, договор перевозки', problem: 'Ответственность перевозчика ≠ реальная стоимость товара' },
-  { title: '⑥ Таможня РФ', checks: 'ТН ВЭД, таможенная стоимость, разрешительные документы', problem: 'Неверный код → доначисление; занижение стоимости → штраф' },
+  { title: '⑥ Таможня РФ', checks: 'ТН ВЭД, таможенная стоимость, разрешительные документы', problem: 'Неверный код → доначисление; занижение стоимости → КТС и доначисление' },
   { title: '⑦ Склад / Маркировка', checks: '«Честный знак», маркировка на русском', problem: 'Отсутствие кодов до поступления на склад маркетплейса' },
   { title: '⑧ Маркетплейс', checks: 'Декларации, сертификаты, права на товарный знак', problem: '«Купленные» документы не проходят проверку реестра Росаккредитации' },
 ];
@@ -1753,7 +1750,7 @@ function toggleScenario(head) {
    ЧЕКЛИСТ + ПРОГРЕСС + СКОР
 ═══════════════════════════════════════ */
 const TOTAL = 22;
-const GROUP_SIZES = [4, 3, 5, 5, 5];
+const GROUP_SIZES = [4, 3, 4, 5, 5];
 
 function loadChecks() {
   document.querySelectorAll('.check-items input[type="checkbox"]').forEach(cb => {
