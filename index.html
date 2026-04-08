@@ -8,7 +8,7 @@
 <meta name="description" content="Интерактивная карта точек потерь при импорте из Китая. Персонализированный инструмент диагностики для предпринимателей.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <!-- Yandex.Metrika -->
 <script type="text/javascript">
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -30,14 +30,14 @@
   var PWD = 'VeDCHiNa_p1.0';
   if(localStorage.getItem('riskmap_auth') !== PWD){
     document.addEventListener('DOMContentLoaded', function(){
-      document.body.innerHTML = '<div id="pw-gate" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f5f6fa;font-family:\'Open Sans\',sans-serif;">'
-        + '<div style="background:#fff;border-radius:12px;padding:48px 40px;max-width:380px;width:90%;text-align:center;box-shadow:0 4px 32px rgba(0,0,0,0.10);">'
-        + '<div style="font-size:28px;margin-bottom:8px;">🔒</div>'
-        + '<h2 style="font-size:20px;font-weight:700;color:#1c1c1c;margin:0 0 8px;">Закрытый инструмент</h2>'
-        + '<p style="font-size:14px;color:#666;margin:0 0 28px;line-height:1.6;">Карта рисков доступна участникам курса.<br>Введите пароль из вашего кабинета.</p>'
-        + '<input id="pw-input" type="password" placeholder="Пароль" style="width:100%;box-sizing:border-box;padding:12px 16px;border:1.5px solid #ddd;border-radius:8px;font-size:15px;outline:none;margin-bottom:12px;">'
-        + '<div id="pw-error" style="color:#e53935;font-size:13px;margin-bottom:10px;min-height:18px;"></div>'
-        + '<button onclick="checkPwd()" style="width:100%;padding:13px;background:#597dee;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;">Войти →</button>'
+      document.body.innerHTML = '<div id="pw-gate" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:hsl(225 20% 7%);font-family:\'Inter\',system-ui,sans-serif;">'
+        + '<div style="background:hsl(225 16% 13%);border-radius:20px;padding:48px 40px;max-width:400px;width:90%;text-align:center;box-shadow:0 8px 48px rgba(0,0,0,0.5), 0 0 60px hsla(228 80% 60% / 0.25);border:1px solid rgba(255,255,255,0.08);">'
+        + '<div style="margin-bottom:16px;"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg></div>'
+        + '<h2 style="font-size:20px;font-weight:700;color:#fff;margin:0 0 8px;font-family:\'Space Grotesk\',system-ui,sans-serif;">Закрытый инструмент</h2>'
+        + '<p style="font-size:14px;color:rgba(255,255,255,0.5);margin:0 0 28px;line-height:1.6;">Карта рисков доступна участникам курса.<br>Введите пароль из вашего кабинета.</p>'
+        + '<input id="pw-input" type="password" placeholder="Пароль" style="width:100%;box-sizing:border-box;padding:14px 16px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;font-size:15px;outline:none;margin-bottom:12px;background:rgba(255,255,255,0.04);color:#fff;font-family:inherit;transition:border-color 0.3s ease, box-shadow 0.3s ease;" onfocus="this.style.borderColor=\'hsl(228 70% 55%)\';this.style.boxShadow=\'0 0 0 3px hsla(228 80% 60% / 0.2)\'" onblur="this.style.borderColor=\'rgba(255,255,255,0.1)\';this.style.boxShadow=\'none\'">'
+        + '<div id="pw-error" style="color:#e04040;font-size:13px;margin-bottom:10px;min-height:18px;"></div>'
+        + '<button onclick="checkPwd()" style="width:100%;padding:14px;background:linear-gradient(135deg, hsl(228 70% 50%), hsl(250 60% 55%));color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:\'Space Grotesk\',system-ui,sans-serif;box-shadow:0 4px 20px hsla(228 80% 60% / 0.25);transition:transform 0.2s ease,box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-2px)\';this.style.boxShadow=\'0 8px 32px hsla(228 80% 60% / 0.35)\'" onmouseout="this.style.transform=\'none\';this.style.boxShadow=\'0 4px 20px hsla(228 80% 60% / 0.25)\'">Войти</button>'
         + '</div></div>';
     });
     window.checkPwd = function(){
@@ -47,7 +47,7 @@
         location.reload();
       } else {
         document.getElementById('pw-error').textContent = 'Неверный пароль. Проверьте и попробуйте снова.';
-        document.getElementById('pw-input').style.borderColor = '#e53935';
+        document.getElementById('pw-input').style.borderColor = '#e04040';
       }
     };
     document.addEventListener('keydown', function(e){ if(e.key==='Enter') window.checkPwd && window.checkPwd(); });
@@ -59,24 +59,73 @@
    ТОКЕНЫ
 ═══════════════════════════════════════ */
 :root {
-  --accent:        #597dee;
-  --accent-dark:   #3d5ed4;
-  --accent-light:  #eef1fd;
-  --text:          #1c1c1c;
-  --muted:         #555;
-  --bg:            #ffffff;
-  --bg-soft:       #f9f9f9;
-  --border:        #e4e4e4;
-  --danger:        #e53935;
-  --danger-bg:     rgba(229,57,53,0.08);
-  --warn:          #f57c00;
-  --warn-bg:       rgba(245,124,0,0.08);
-  --ok:            #2e7d32;
-  --ok-bg:         rgba(46,125,50,0.08);
-  --radius:        12px;
-  --shadow:        0 2px 16px rgba(0,0,0,0.07);
-  --col:           860px;
-  --trans:         0.25s ease;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Фоны */
+  --bg:            hsl(225 20% 7%);
+  --bg-soft:       hsl(225 18% 10%);
+  --bg-elevated:   hsl(225 16% 13%);
+  --bg-glass:      rgba(255, 255, 255, 0.04);
+
+  /* Текст */
+  --text:          #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  --muted:         rgba(255, 255, 255, 0.45);
+
+  /* Бордеры */
+  --border:        rgba(255, 255, 255, 0.08);
+  --border-hover:  rgba(255, 255, 255, 0.15);
+
+  /* Accent */
+  --accent:        hsl(228 70% 55%);
+  --accent-dark:   hsl(228 70% 45%);
+  --accent-light:  hsl(228 80% 70%);
+  --accent-glow:   hsla(228 80% 60% / 0.25);
+  --accent-bg:     hsla(228 70% 55% / 0.08);
+
+  /* Уровни риска */
+  --danger:        hsl(4 80% 58%);
+  --danger-bg:     hsla(4 80% 58% / 0.10);
+  --danger-glow:   hsla(4 80% 58% / 0.20);
+  --warn:          hsl(32 90% 55%);
+  --warn-bg:       hsla(32 90% 55% / 0.10);
+  --warn-glow:     hsla(32 90% 55% / 0.20);
+  --ok:            hsl(142 50% 45%);
+  --ok-bg:         hsla(142 50% 45% / 0.10);
+  --ok-glow:       hsla(142 50% 45% / 0.20);
+
+  /* Эффекты */
+  --shadow-sm:     0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md:     0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg:     0 8px 48px rgba(0, 0, 0, 0.5);
+  --shadow-glow:   0 0 40px var(--accent-glow);
+
+  --radius:        14px;
+  --radius-sm:     10px;
+  --radius-lg:     20px;
+
+  --trans:         0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --trans-bounce:  0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --col:           880px;
+
+  /* Градиенты */
+  --gradient-hero: linear-gradient(135deg, hsl(225 25% 8%) 0%, hsl(228 30% 12%) 25%, hsl(240 20% 10%) 50%, hsl(220 25% 9%) 75%, hsl(225 25% 8%) 100%);
+  --gradient-accent: linear-gradient(135deg, hsl(228 70% 50%), hsl(250 60% 55%));
+}
+
+/* ═══════════════════════════════════════
+   NOISE TEXTURE OVERLAY
+═══════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  mix-blend-mode: overlay;
 }
 
 /* ═══════════════════════════════════════
@@ -84,14 +133,16 @@
 ═══════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
 
 body {
-  font-family: 'Open Sans', Arial, sans-serif;
+  font-family: var(--font-body);
   background: var(--bg);
   color: var(--text);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .wrap {
@@ -100,10 +151,14 @@ body {
   padding: 0 20px;
 }
 
-h2 { font-size: 1.5rem; font-weight: 700; line-height: 1.3; }
-h3 { font-size: 1.1rem; font-weight: 700; line-height: 1.3; }
+h1, h2, h3, .btn-cta, .chain-node-btn, .gauge-pct {
+  font-family: var(--font-display);
+}
 
-a { color: var(--accent); text-decoration: none; }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; color: var(--text); }
+h3 { font-size: 1.15rem; font-weight: 600; line-height: 1.3; color: var(--text); }
+
+a { color: var(--accent-light); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 /* ═══════════════════════════════════════
@@ -113,8 +168,9 @@ a:hover { text-decoration: underline; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(12px);
+  background: rgba(13, 16, 23, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
 }
 
@@ -148,8 +204,9 @@ a:hover { text-decoration: underline; }
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: var(--text);
+  color: #fff;
   line-height: 1.2;
+  font-family: var(--font-display);
 }
 .logo-text span { display: block; font-weight: 400; color: var(--muted); font-size: 11px; letter-spacing: 0; }
 
@@ -168,33 +225,149 @@ a:hover { text-decoration: underline; }
   white-space: nowrap;
 }
 
-.progress-label strong { color: var(--accent); }
+.progress-label strong { color: var(--accent-light); }
 
 .progress-bar-wrap {
   flex: 1;
   height: 6px;
-  background: var(--border);
+  background: rgba(255,255,255,0.06);
   border-radius: 99px;
   overflow: hidden;
 }
 
 .progress-bar-fill {
   height: 100%;
-  background: var(--accent);
   border-radius: 99px;
-  transition: width 0.4s ease;
   width: 0%;
+  background: linear-gradient(90deg, var(--accent) 0%, hsl(228 80% 70%) 50%, var(--accent) 100%);
+  background-size: 200% auto;
+  animation: progressShimmer 2s linear infinite, progressGlow 3s ease-in-out infinite;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+@keyframes progressShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes progressGlow {
+  0%, 100% { box-shadow: 0 0 8px var(--accent-glow); }
+  50%      { box-shadow: 0 0 16px var(--accent-glow); }
+}
+
+/* ═══════════════════════════════════════
+   PARTS NAV (Sticky under header)
+═══════════════════════════════════════ */
+.parts-nav {
+  position: sticky;
+  top: 60px;
+  z-index: 99;
+  background: rgba(13, 16, 23, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: transform 0.3s ease;
+}
+
+.parts-nav .wrap {
+  display: flex;
+  gap: 0;
+}
+
+.parts-nav-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: all 0.25s ease;
+  justify-content: center;
+}
+
+.parts-nav-item:hover {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.parts-nav-item.active {
+  color: var(--accent-light);
+  border-bottom-color: var(--accent);
+}
+
+.parts-nav-num {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.5;
+}
 
 /* ═══════════════════════════════════════
    HERO
 ═══════════════════════════════════════ */
 .hero {
-  background: linear-gradient(135deg, #f9faff 0%, #eef1fd 60%, #f5f8ff 100%);
-  border-bottom: 1px solid var(--border);
-  padding: 56px 20px 48px;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 20px 64px;
   text-align: center;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-hero);
+  background-size: 400% 400%;
+  animation: heroGradientShift 15s ease infinite;
+  border-bottom: 1px solid var(--border);
+}
+
+@keyframes heroGradientShift {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* Floating orbs */
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsla(228 80% 55% / 0.12) 0%, transparent 70%);
+  top: -150px;
+  right: -100px;
+  animation: floatOrb1 20s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsla(260 60% 50% / 0.08) 0%, transparent 70%);
+  bottom: -120px;
+  left: -80px;
+  animation: floatOrb2 25s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes floatOrb1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(-30px, 20px) scale(1.05); }
+  66%      { transform: translate(20px, -15px) scale(0.95); }
+}
+
+@keyframes floatOrb2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%      { transform: translate(25px, -20px) scale(1.03); }
+  75%      { transform: translate(-15px, 25px) scale(0.97); }
 }
 
 .hero-badge {
@@ -203,47 +376,60 @@ a:hover { text-decoration: underline; }
   gap: 6px;
   padding: 5px 14px;
   border-radius: 99px;
-  background: var(--accent-light);
-  border: 1px solid rgba(89,125,238,0.25);
+  background: var(--accent-bg);
+  border: 1px solid rgba(255,255,255,0.06);
   font-size: 12px;
   font-weight: 600;
-  color: var(--accent-dark);
+  color: var(--accent-light);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
 }
 
 .hero h1 {
-  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+  max-width: 760px;
   line-height: 1.2;
-  margin-bottom: 16px;
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
 }
 
 .hero h1 em {
   font-style: normal;
-  color: var(--accent);
+  background: linear-gradient(135deg, var(--accent-light), hsl(260 70% 70%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hero-sub {
-  font-size: 1.05rem;
-  color: var(--muted);
+  font-size: 1.1rem;
+  color: var(--text-secondary);
   max-width: 600px;
-  margin: 0 auto 16px;
+  margin: 0 auto 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-desc {
-  font-size: 0.9rem;
-  color: var(--muted);
-  max-width: 540px;
-  margin: 0 auto;
-  padding: 14px 20px;
-  background: rgba(255,255,255,0.8);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius);
-  border: 1px solid var(--border);
+  padding: 16px 24px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  max-width: 560px;
+  position: relative;
+  z-index: 1;
 }
 
 /* ═══════════════════════════════════════
@@ -251,21 +437,43 @@ a:hover { text-decoration: underline; }
 ═══════════════════════════════════════ */
 .section {
   padding: 48px 20px;
-  border-bottom: 1px solid var(--border);
+  position: relative;
 }
 
-.section:last-child { border-bottom: none; }
+.section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, 600px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 20%, var(--accent-glow) 50%, rgba(255,255,255,0.12) 80%, transparent 100%);
+}
+
+.section:last-of-type::after { display: none; }
 
 .section-label {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 10px;
+  color: var(--accent-light);
+  margin-bottom: 12px;
+  padding: 4px 12px;
+  background: var(--accent-bg);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 99px;
+}
+
+.section-label svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.5;
+  fill: none;
 }
 
 .section h2 { margin-bottom: 8px; }
@@ -280,11 +488,13 @@ a:hover { text-decoration: underline; }
    ПЕРСОНАЛИЗАЦИЯ
 ═══════════════════════════════════════ */
 .personalize-card {
-  background: var(--bg-soft);
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius);
   padding: 28px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-sm);
 }
 
 .personalize-grid {
@@ -303,34 +513,40 @@ a:hover { text-decoration: underline; }
   font-size: 13px;
   font-weight: 600;
   margin-bottom: 7px;
-  color: var(--text);
+  color: var(--text-secondary);
 }
 
 .field-select, .field-input {
   width: 100%;
   padding: 10px 14px;
-  border: 1.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: 8px;
   font-family: inherit;
   font-size: 14px;
-  background: var(--bg);
+  background: rgba(255,255,255,0.04);
   color: var(--text);
-  transition: border-color var(--trans);
+  transition: border-color var(--trans), box-shadow var(--trans);
   appearance: none;
   -webkit-appearance: none;
 }
 
 .field-select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.45)' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   padding-right: 36px;
+  background-color: rgba(255,255,255,0.04);
+}
+
+.field-select option {
+  background: hsl(225 16% 13%);
+  color: #fff;
 }
 
 .field-select:focus, .field-input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(89,125,238,0.12);
+  box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
 .risk-result {
@@ -338,18 +554,18 @@ a:hover { text-decoration: underline; }
   align-items: center;
   gap: 12px;
   padding: 14px 20px;
-  background: var(--accent-light);
-  border: 1.5px solid rgba(89,125,238,0.25);
+  background: var(--accent-bg);
+  border: 1px solid rgba(255,255,255,0.06);
   border-radius: 10px;
   font-size: 0.9rem;
 }
 
 .risk-result-icon { font-size: 20px; flex-shrink: 0; }
 
-.risk-result-text { color: var(--muted); }
+.risk-result-text { color: var(--text-secondary); }
 
 .risk-result-text strong {
-  color: var(--accent-dark);
+  color: var(--accent-light);
   font-size: 1rem;
 }
 
@@ -359,16 +575,47 @@ a:hover { text-decoration: underline; }
 .risks-list { display: flex; flex-direction: column; gap: 12px; }
 
 .risk-card {
-  border: 1.5px solid var(--border);
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  transition: border-color var(--trans), box-shadow var(--trans);
-  background: var(--bg);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+}
+
+/* Gradient border glow on hover */
+.risk-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent, rgba(255,255,255,0.05));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.risk-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md), 0 0 30px var(--accent-glow);
+  border-color: var(--border-hover);
+}
+
+.risk-card:hover::before {
+  opacity: 1;
 }
 
 .risk-card.is-mine {
   border-color: var(--danger);
-  box-shadow: 0 0 0 3px rgba(229,57,53,0.08);
+  box-shadow: 0 0 0 1px var(--danger), 0 0 20px var(--danger-glow);
+}
+
+.risk-card.is-mine:hover {
+  box-shadow: 0 0 0 1px var(--danger), 0 0 40px var(--danger-glow);
 }
 
 .risk-card-head {
@@ -381,18 +628,26 @@ a:hover { text-decoration: underline; }
   transition: background var(--trans);
 }
 
-.risk-card-head:hover { background: var(--bg-soft); }
+.risk-card-head:hover { background: rgba(255,255,255,0.02); }
 
 .risk-icon {
-  font-size: 22px;
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--accent-bg);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
-  background: var(--bg-soft);
+  flex-shrink: 0;
+}
+
+.risk-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--accent-light);
+  stroke-width: 1.5;
+  fill: none;
 }
 
 .risk-title-wrap { flex: 1; min-width: 0; }
@@ -404,6 +659,7 @@ a:hover { text-decoration: underline; }
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
+  color: var(--text);
 }
 
 .risk-badge {
@@ -414,6 +670,7 @@ a:hover { text-decoration: underline; }
   letter-spacing: 0.05em;
   text-transform: uppercase;
   flex-shrink: 0;
+  font-family: var(--font-body);
 }
 
 .risk-badge.danger { background: var(--danger-bg); color: var(--danger); }
@@ -429,7 +686,7 @@ a:hover { text-decoration: underline; }
 .risk-toggle {
   width: 28px; height: 28px;
   border-radius: 50%;
-  border: 1.5px solid var(--border);
+  border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
   font-size: 14px;
   color: var(--muted);
@@ -440,18 +697,34 @@ a:hover { text-decoration: underline; }
 .risk-card.open .risk-toggle {
   transform: rotate(180deg);
   border-color: var(--accent);
-  color: var(--accent);
+  color: var(--accent-light);
 }
 
+/* Accordion animation with grid */
 .risk-body {
-  display: none;
-  padding: 0 20px 20px;
-  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  border-top: 1px solid transparent;
 }
 
-.risk-card.open .risk-body { display: block; }
+.risk-body-inner {
+  overflow: hidden;
+  padding: 0 20px;
+}
 
-.risk-cases { margin: 16px 0; }
+.risk-card.open .risk-body {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  border-top-color: var(--border);
+}
+
+.risk-card.open .risk-body-inner {
+  padding: 16px 20px 20px;
+}
+
+.risk-cases { margin: 0 0 16px; }
 
 .risk-cases-title {
   font-size: 12px;
@@ -467,22 +740,28 @@ a:hover { text-decoration: underline; }
   gap: 10px;
   padding: 10px 14px;
   border-radius: 8px;
-  background: var(--bg-soft);
+  background: rgba(255,255,255,0.02);
   margin-bottom: 8px;
   font-size: 14px;
   align-items: flex-start;
+  color: var(--text-secondary);
 }
 
 .case-item::before {
-  content: '—';
-  color: var(--danger);
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--danger);
   flex-shrink: 0;
-  font-weight: 700;
+  margin-top: 9px;
 }
 
 .case-item .case-sum {
   font-weight: 700;
   color: var(--danger);
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
 }
 
 .mechanism-box {
@@ -492,6 +771,7 @@ a:hover { text-decoration: underline; }
   border-radius: 0 8px 8px 0;
   font-size: 14px;
   margin-bottom: 16px;
+  color: var(--text-secondary);
 }
 
 .mechanism-box b { color: var(--warn); }
@@ -502,20 +782,44 @@ a:hover { text-decoration: underline; }
   gap: 10px;
   padding: 12px 16px;
   border-radius: 8px;
-  border: 1.5px dashed var(--border);
+  border: 1px dashed var(--border);
   cursor: pointer;
   transition: all var(--trans);
   font-size: 14px;
   font-weight: 600;
+  color: var(--text-secondary);
 }
 
 .mine-check-wrap:hover { border-color: var(--danger); background: var(--danger-bg); }
 
 .mine-check-wrap input[type="checkbox"] {
-  width: 18px; height: 18px;
-  accent-color: var(--danger);
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px; height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: transparent;
   cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
   flex-shrink: 0;
+}
+
+.mine-check-wrap input[type="checkbox"]:checked {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+.mine-check-wrap input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 /* ═══════════════════════════════════════
@@ -545,23 +849,37 @@ a:hover { text-decoration: underline; }
 .chain-node-btn {
   padding: 10px 14px;
   border-radius: 8px;
-  border: 1.5px solid var(--border);
-  background: var(--bg);
-  font-family: inherit;
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  font-family: var(--font-display);
   font-size: 12px;
   font-weight: 700;
-  color: var(--text);
+  color: var(--text-secondary);
   cursor: pointer;
   white-space: nowrap;
-  transition: all var(--trans);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   text-align: center;
 }
 
-.chain-node-btn:hover, .chain-node.active .chain-node-btn {
+.chain-node-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   border-color: var(--accent);
-  background: var(--accent-light);
-  color: var(--accent-dark);
-  box-shadow: 0 2px 12px rgba(89,125,238,0.18);
+  background: var(--accent-bg);
+  color: var(--accent-light);
+}
+
+.chain-node.active .chain-node-btn {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+  color: var(--accent-light);
+  box-shadow: 0 0 20px var(--accent-glow), 0 4px 12px rgba(0,0,0,0.3);
+  animation: nodeGlow 2s ease-in-out infinite;
+}
+
+@keyframes nodeGlow {
+  0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
+  50%      { box-shadow: 0 0 35px var(--accent-glow); }
 }
 
 .chain-node-num {
@@ -570,22 +888,39 @@ a:hover { text-decoration: underline; }
   font-weight: 600;
 }
 
+/* Pulsing chain arrows */
 .chain-arrow {
   font-size: 18px;
-  color: var(--border);
+  color: rgba(255, 255, 255, 0.2);
   padding: 0 4px;
   flex-shrink: 0;
   align-self: center;
   margin-bottom: 20px;
+  animation: chainPulse 2s ease-in-out infinite;
 }
+
+@keyframes chainPulse {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 1; color: var(--accent-light); }
+}
+
+.chain-arrow:nth-child(2)  { animation-delay: 0s; }
+.chain-arrow:nth-child(4)  { animation-delay: 0.25s; }
+.chain-arrow:nth-child(6)  { animation-delay: 0.50s; }
+.chain-arrow:nth-child(8)  { animation-delay: 0.75s; }
+.chain-arrow:nth-child(10) { animation-delay: 1.00s; }
+.chain-arrow:nth-child(12) { animation-delay: 1.25s; }
+.chain-arrow:nth-child(14) { animation-delay: 1.50s; }
 
 .chain-popup {
   display: none;
   margin-top: 16px;
   padding: 20px;
   border-radius: var(--radius);
-  background: var(--accent-light);
-  border: 1.5px solid rgba(89,125,238,0.25);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.06);
 }
 
 .chain-popup.visible { display: block; }
@@ -594,6 +929,7 @@ a:hover { text-decoration: underline; }
   font-weight: 700;
   margin-bottom: 12px;
   font-size: 1rem;
+  color: var(--text);
 }
 
 .chain-popup-grid {
@@ -612,12 +948,12 @@ a:hover { text-decoration: underline; }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--accent);
+  color: var(--accent-light);
   margin-bottom: 4px;
 }
 .chain-popup-item-val {
   font-size: 14px;
-  color: var(--text);
+  color: var(--text-secondary);
 }
 
 /* ═══════════════════════════════════════
@@ -626,7 +962,7 @@ a:hover { text-decoration: underline; }
 .tabs-nav {
   display: flex;
   gap: 4px;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
   margin-bottom: 24px;
 }
 
@@ -634,9 +970,9 @@ a:hover { text-decoration: underline; }
   padding: 10px 20px;
   border: none;
   border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
+  margin-bottom: -1px;
   background: transparent;
-  font-family: inherit;
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
   color: var(--muted);
@@ -645,10 +981,10 @@ a:hover { text-decoration: underline; }
   transition: all var(--trans);
 }
 
-.tab-btn:hover { color: var(--text); background: var(--bg-soft); }
+.tab-btn:hover { color: var(--text-secondary); background: rgba(255,255,255,0.02); }
 
 .tab-btn.active {
-  color: var(--accent);
+  color: var(--accent-light);
   border-bottom-color: var(--accent);
   background: transparent;
 }
@@ -661,8 +997,9 @@ a:hover { text-decoration: underline; }
 
 .scenario-item {
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
+  background: rgba(255,255,255,0.02);
 }
 
 .scenario-head {
@@ -675,9 +1012,10 @@ a:hover { text-decoration: underline; }
   font-size: 14px;
   transition: background var(--trans);
   user-select: none;
+  color: var(--text-secondary);
 }
 
-.scenario-head:hover { background: var(--bg-soft); }
+.scenario-head:hover { background: rgba(255,255,255,0.03); }
 
 .scenario-head .s-toggle {
   font-size: 18px;
@@ -688,17 +1026,32 @@ a:hover { text-decoration: underline; }
 
 .scenario-item.open .scenario-head .s-toggle { transform: rotate(180deg); }
 
+/* Animated accordion for scenarios */
 .scenario-body {
-  display: none;
-  padding: 0 18px 16px;
-  font-size: 14px;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  border-top: 1px solid transparent;
 }
 
-.scenario-item.open .scenario-body { display: block; }
+.scenario-body-inner {
+  overflow: hidden;
+  padding: 0 18px;
+}
 
-.scenario-body p { margin-top: 12px; }
+.scenario-item.open .scenario-body {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  border-top-color: var(--border);
+}
+
+.scenario-item.open .scenario-body-inner {
+  padding: 12px 18px 16px;
+}
+
+.scenario-body p { margin-top: 0; color: var(--text-secondary); font-size: 14px; }
+.scenario-body p + p { margin-top: 12px; }
 
 .scenario-body ul {
   margin: 10px 0 0 16px;
@@ -707,7 +1060,7 @@ a:hover { text-decoration: underline; }
   gap: 4px;
 }
 
-.scenario-body li { color: var(--muted); }
+.scenario-body li { color: var(--muted); font-size: 14px; }
 
 .scenario-body .s-fine {
   margin-top: 12px;
@@ -716,6 +1069,7 @@ a:hover { text-decoration: underline; }
   border-radius: 8px;
   color: var(--danger);
   font-weight: 600;
+  font-size: 14px;
 }
 
 /* ═══════════════════════════════════════
@@ -734,6 +1088,7 @@ a:hover { text-decoration: underline; }
   display: flex;
   align-items: center;
   gap: 8px;
+  color: var(--text);
 }
 
 .group-count {
@@ -741,6 +1096,8 @@ a:hover { text-decoration: underline; }
   font-weight: 600;
   color: var(--muted);
   margin-left: auto;
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
 }
 
 .check-items { display: flex; flex-direction: column; gap: 6px; }
@@ -749,38 +1106,72 @@ a:hover { text-decoration: underline; }
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1.5px solid var(--border);
-  transition: all var(--trans);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  transition: all 0.25s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
+  background: rgba(255, 255, 255, 0.02);
 }
 
-.check-item:hover { border-color: var(--accent); background: rgba(89,125,238,0.04); }
+.check-item:hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  transform: translateX(4px);
+  box-shadow: -4px 0 0 var(--accent);
+}
 
 .check-item.done {
   background: var(--ok-bg);
-  border-color: rgba(46,125,50,0.3);
+  border-color: rgba(58, 165, 92, 0.2);
 }
 
 .check-item.done .check-text { text-decoration: line-through; color: var(--muted); }
 
+/* Custom checkbox */
 .check-item input[type="checkbox"] {
-  width: 18px; height: 18px;
-  accent-color: var(--ok);
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: transparent;
   cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
   flex-shrink: 0;
   margin-top: 1px;
 }
 
-.check-text { font-size: 14px; line-height: 1.5; }
+.check-item input[type="checkbox"]:checked {
+  background: var(--ok);
+  border-color: var(--ok);
+}
+
+.check-item input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.check-text { font-size: 14px; line-height: 1.5; color: var(--text-secondary); }
 
 /* ═══════════════════════════════════════
    СКОР / GAUGE
 ═══════════════════════════════════════ */
 .score-section-bg {
-  background: var(--bg-soft);
-  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-lg);
   padding: 40px 24px;
   text-align: center;
 }
@@ -793,26 +1184,28 @@ a:hover { text-decoration: underline; }
 
 .gauge-svg { overflow: visible; }
 
-.gauge-track { fill: none; stroke: var(--border); stroke-width: 12; }
+.gauge-track { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 12; }
 
 .gauge-fill {
   fill: none;
   stroke-width: 12;
   stroke-linecap: round;
-  transition: stroke-dashoffset 0.6s ease, stroke 0.4s ease;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.6s ease;
   transform: rotate(-90deg);
   transform-origin: 60px 60px;
+  filter: drop-shadow(0 0 6px currentColor);
 }
 
 .gauge-pct {
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-display);
   font-size: 22px;
   font-weight: 700;
   fill: var(--text);
+  font-variant-numeric: tabular-nums;
 }
 
 .gauge-label {
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 10px;
   fill: var(--muted);
 }
@@ -832,49 +1225,46 @@ a:hover { text-decoration: underline; }
 }
 
 .cta-box {
-  background: var(--accent);
-  border-radius: var(--radius);
-  padding: 32px 28px;
+  background: linear-gradient(135deg, hsl(228 50% 18%), hsl(240 40% 15%));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
   color: #fff;
   text-align: center;
-  max-width: 560px;
+  max-width: 580px;
   margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle glow behind CTA */
+.cta-box::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+  opacity: 0.3;
+  pointer-events: none;
 }
 
 .cta-box h3 {
   color: #fff;
   font-size: 1.1rem;
   margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
 }
 
 .cta-box p {
-  opacity: 0.88;
+  opacity: 0.75;
   font-size: 0.92rem;
-  margin-bottom: 24px;
+  margin-bottom: 0;
   line-height: 1.6;
-}
-
-.btn-cta {
-  display: inline-block;
-  padding: 14px 32px;
-  border-radius: 10px;
-  background: #fff;
-  color: var(--accent-dark);
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  text-decoration: none;
-  transition: all var(--trans);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-}
-
-.btn-cta:hover {
-  background: var(--accent-light);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-  text-decoration: none;
+  position: relative;
+  z-index: 1;
 }
 
 /* ═══════════════════════════════════════
@@ -903,108 +1293,44 @@ a:hover { text-decoration: underline; }
 .delay-4 { animation-delay: 0.4s; }
 
 /* ═══════════════════════════════════════
-   ВАУ-ЭФФЕКТЫ
+   SCROLL REVEAL
 ═══════════════════════════════════════ */
-
-/* Анимированный градиент hero */
-@keyframes gradientShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.hero {
-  background: linear-gradient(135deg, #f0f4ff, #e8eeff, #f5f0ff, #eef5ff, #f9faff);
-  background-size: 400% 400%;
-  animation: gradientShift 8s ease infinite;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Декоративные круги в hero */
-.hero::before, .hero::after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-}
-.hero::before {
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(89,125,238,0.10) 0%, transparent 70%);
-  top: -100px; right: -80px;
-}
-.hero::after {
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(138,100,238,0.08) 0%, transparent 70%);
-  bottom: -80px; left: -60px;
-}
-
-/* Scroll-reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
 
-/* Hover-эффект на карточках рисков */
-.risk-card {
-  transition: border-color var(--trans), box-shadow var(--trans), transform var(--trans);
-}
-.risk-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(89,125,238,0.12);
-  border-color: rgba(89,125,238,0.35);
-}
-.risk-card.is-mine:hover {
-  box-shadow: 0 8px 28px rgba(229,57,53,0.15);
-}
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
 
-/* Hover-эффект на chain-node */
-.chain-node-btn {
-  transition: all 0.25s cubic-bezier(.34,1.56,.64,1);
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.chain-node-btn:hover {
-  transform: translateY(-3px) scale(1.04);
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
-/* Hover на check-item */
-.check-item {
-  transition: all var(--trans), transform 0.2s ease;
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.check-item:hover {
-  transform: translateX(4px);
-}
-
-/* Hover на CTA кнопке */
-.btn-cta {
-  transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
-}
-.btn-cta:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.22);
-}
-
-/* Шиммер на прогресс-баре */
-@keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-.progress-bar-fill {
-  background: linear-gradient(90deg, var(--accent) 0%, #7b9bf5 50%, var(--accent) 100%);
-  background-size: 200% auto;
-  animation: shimmer 2.5s linear infinite;
-}
-
-/* Параллакс-контейнер */
-.hero-parallax {
-  will-change: transform;
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* Pulse на score-status при изменении */
@@ -1018,12 +1344,40 @@ a:hover { text-decoration: underline; }
 }
 
 /* ═══════════════════════════════════════
+   BACKGROUND PARTICLES
+═══════════════════════════════════════ */
+.bg-particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+
+.bg-particles span {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  animation: particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* ═══════════════════════════════════════
    PRINT
 ═══════════════════════════════════════ */
 @media print {
   .site-header, .risk-toggle,
   .mine-check-wrap, .chain-node-btn,
-  .tab-btn, .btn-cta { display: none !important; }
+  .tab-btn, .btn-cta, .parts-nav, .bg-particles { display: none !important; }
 
   .risk-body, .scenario-body, .tab-panel { display: block !important; }
 
@@ -1038,15 +1392,35 @@ a:hover { text-decoration: underline; }
    RESPONSIVE
 ═══════════════════════════════════════ */
 @media (max-width: 600px) {
-  .hero { padding: 36px 16px 32px; }
+  .hero { padding: 48px 16px 40px; min-height: auto; }
+  .hero::before { width: 250px; height: 250px; top: -80px; right: -60px; }
+  .hero::after { width: 200px; height: 200px; bottom: -60px; left: -40px; }
   .section { padding: 36px 16px; }
   .personalize-card { padding: 20px; }
   .header-inner { gap: 8px; }
   .header-progress { min-width: 140px; }
+  .parts-nav-item { padding: 10px 8px; font-size: 11px; gap: 4px; }
+  .parts-nav-num { display: none; }
+  .chain-arrow { animation: none; }
+  .cta-box { padding: 28px 20px; }
+  .score-section-bg { padding: 28px 16px; }
+}
+
+/* ═══════════════════════════════════════
+   REDUCED MOTION
+═══════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 </style>
 </head>
 <body>
+
+<!-- Background particles -->
+<div class="bg-particles" id="bg-particles"></div>
 
 <!-- ═══════ STICKY HEADER ═══════ -->
 <header class="site-header">
@@ -1063,6 +1437,28 @@ a:hover { text-decoration: underline; }
   </div>
 </header>
 
+<!-- ═══════ PARTS NAV ═══════ -->
+<nav class="parts-nav" id="parts-nav">
+  <div class="wrap">
+    <a href="#part-1" class="parts-nav-item active" data-part="1">
+      <span class="parts-nav-num">01</span>
+      <span class="parts-nav-label">Риски</span>
+    </a>
+    <a href="#part-2" class="parts-nav-item" data-part="2">
+      <span class="parts-nav-num">02</span>
+      <span class="parts-nav-label">Цепочка</span>
+    </a>
+    <a href="#part-3" class="parts-nav-item" data-part="3">
+      <span class="parts-nav-num">03</span>
+      <span class="parts-nav-label">Банки и МП</span>
+    </a>
+    <a href="#part-4" class="parts-nav-item" data-part="4">
+      <span class="parts-nav-num">04</span>
+      <span class="parts-nav-label">Чеклист</span>
+    </a>
+  </div>
+</nav>
+
 <!-- ═══════ HERO ═══════ -->
 <div id="top"></div>
 <section class="hero">
@@ -1072,9 +1468,9 @@ a:hover { text-decoration: underline; }
 </section>
 
 <!-- ═══════ ПЕРСОНАЛИЗАЦИЯ ═══════ -->
-<section class="section">
+<section class="section" id="section-personalize">
   <div class="wrap">
-    <div class="section-label">⚙️ Шаг 1</div>
+    <div class="section-label"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Шаг 1</div>
     <h2>Настройте карту под себя</h2>
     <p class="section-desc">Суммы потерь пересчитаются автоматически под вашу нишу и размер партии</p>
 
@@ -1083,9 +1479,10 @@ a:hover { text-decoration: underline; }
         <div>
           <label class="field-label" for="niche">Ваша ниша</label>
           <select class="field-select" id="niche" onchange="updatePersonalization()">
-            <option value="1.0">Выберите нишу…</option>
+            <option value="" disabled selected>Выберите нишу...</option>
             <option value="1.2">Электроника / гаджеты</option>
             <option value="0.9">Одежда / текстиль</option>
+            <option value="1.3">Косметика / бьюти</option>
             <option value="1.5">Оборудование / промтовары</option>
             <option value="1.0">Другое</option>
           </select>
@@ -1096,7 +1493,7 @@ a:hover { text-decoration: underline; }
         </div>
       </div>
       <div class="risk-result" id="risk-result" style="display:none;">
-        <div class="risk-result-icon">⚡</div>
+        <div class="risk-result-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-light)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
         <div class="risk-result-text">Ваша расчётная зона риска: <strong id="risk-range">—</strong></div>
       </div>
     </div>
@@ -1104,9 +1501,9 @@ a:hover { text-decoration: underline; }
 </section>
 
 <!-- ═══════ 7 РИСКОВ ═══════ -->
-<section class="section">
+<section class="section" id="part-1">
   <div class="wrap">
-    <div class="section-label">🔴 Часть 1</div>
+    <div class="section-label"><svg viewBox="0 0 24 24" stroke="var(--danger)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Часть 1</div>
     <h2>7 ситуаций, в которых прибыль «растворяется»</h2>
     <p class="section-desc">Нажмите на карточку — раскроются реальные кейсы и суммы потерь</p>
 
@@ -1115,7 +1512,7 @@ a:hover { text-decoration: underline; }
       <!-- 1 -->
       <div class="risk-card" id="rc-0">
         <div class="risk-card-head" onclick="toggleRisk(0)">
-          <div class="risk-icon">📦</div>
+          <div class="risk-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
           <div class="risk-title-wrap">
             <div class="risk-title">
               «Образец был идеальным»
@@ -1123,9 +1520,10 @@ a:hover { text-decoration: underline; }
             </div>
             <div class="risk-short">Серийная партия не совпадает с образцом по качеству</div>
           </div>
-          <div class="risk-toggle">▼</div>
+          <div class="risk-toggle">&#x25BC;</div>
         </div>
         <div class="risk-body">
+          <div class="risk-body-inner">
           <div class="risk-cases">
             <div class="risk-cases-title">Реальные случаи</div>
             <div class="case-item">Беспроводные наушники: время работы 4–6 ч вместо 24 ч, вся партия вернулась с маркетплейса. <span class="case-sum" data-base-min="320000" data-base-max="320000">Потери: ~320&nbsp;000 руб.</span></div>
@@ -1138,13 +1536,14 @@ a:hover { text-decoration: underline; }
           <label class="mine-check-wrap" onclick="toggleMine(0)">
             <input type="checkbox" id="mine-0"> Это моя ситуация
           </label>
+          </div>
         </div>
       </div>
 
       <!-- 2 -->
       <div class="risk-card" id="rc-1">
         <div class="risk-card-head" onclick="toggleRisk(1)">
-          <div class="risk-icon">🚨</div>
+          <div class="risk-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
           <div class="risk-title-wrap">
             <div class="risk-title">
               «Поставщик исчез»
@@ -1152,9 +1551,10 @@ a:hover { text-decoration: underline; }
             </div>
             <div class="risk-short">Мошенничество, подмена реквизитов, предоплата не вернулась</div>
           </div>
-          <div class="risk-toggle">▼</div>
+          <div class="risk-toggle">&#x25BC;</div>
         </div>
         <div class="risk-body">
+          <div class="risk-body-inner">
           <div class="risk-cases">
             <div class="risk-cases-title">Реальные случаи</div>
             <div class="case-item">Gold Supplier на Alibaba: предоплата $23&nbsp;000. Через 3 недели аккаунт исчез. Alibaba вернул $2&nbsp;100 (Trade Assurance).</div>
@@ -1168,13 +1568,14 @@ a:hover { text-decoration: underline; }
           <label class="mine-check-wrap" onclick="toggleMine(1)">
             <input type="checkbox" id="mine-1"> Это моя ситуация
           </label>
+          </div>
         </div>
       </div>
 
       <!-- 3 -->
       <div class="risk-card" id="rc-2">
         <div class="risk-card-head" onclick="toggleRisk(2)">
-          <div class="risk-icon">🛃</div>
+          <div class="risk-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
           <div class="risk-title-wrap">
             <div class="risk-title">
               «Таможня пересчитала»
@@ -1182,9 +1583,10 @@ a:hover { text-decoration: underline; }
             </div>
             <div class="risk-short">Неверный ТН ВЭД, заниженный инвойс — доначисление + штраф</div>
           </div>
-          <div class="risk-toggle">▼</div>
+          <div class="risk-toggle">&#x25BC;</div>
         </div>
         <div class="risk-body">
+          <div class="risk-body-inner">
           <div class="risk-cases">
             <div class="risk-cases-title">Реальные случаи</div>
             <div class="case-item">Умные часы как «спортивные браслеты»: таможня переклассифицировала. <span class="case-sum">Доначисление + штраф: ~2&nbsp;800&nbsp;000 руб.</span> Груз простоял 6 недель.</div>
@@ -1197,13 +1599,14 @@ a:hover { text-decoration: underline; }
           <label class="mine-check-wrap" onclick="toggleMine(2)">
             <input type="checkbox" id="mine-2"> Это моя ситуация
           </label>
+          </div>
         </div>
       </div>
 
       <!-- 4 -->
       <div class="risk-card" id="rc-3">
         <div class="risk-card-head" onclick="toggleRisk(3)">
-          <div class="risk-icon">🏦</div>
+          <div class="risk-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
           <div class="risk-title-wrap">
             <div class="risk-title">
               «Банк заблокировал платёж»
@@ -1211,9 +1614,10 @@ a:hover { text-decoration: underline; }
             </div>
             <div class="risk-short">115-ФЗ, нерепатриация, зависший перевод через платёжных агентов</div>
           </div>
-          <div class="risk-toggle">▼</div>
+          <div class="risk-toggle">&#x25BC;</div>
         </div>
         <div class="risk-body">
+          <div class="risk-body-inner">
           <div class="risk-cases">
             <div class="risk-cases-title">Типичные сценарии потерь</div>
             <div class="case-item">Платёж завис у промежуточного банка-корреспондента: средства заморожены 2–8 недель.</div>
@@ -1227,13 +1631,14 @@ a:hover { text-decoration: underline; }
           <label class="mine-check-wrap" onclick="toggleMine(3)">
             <input type="checkbox" id="mine-3"> Это моя ситуация
           </label>
+          </div>
         </div>
       </div>
 
       <!-- 5 -->
       <div class="risk-card" id="rc-4">
         <div class="risk-card-head" onclick="toggleRisk(4)">
-          <div class="risk-icon">🛒</div>
+          <div class="risk-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
           <div class="risk-title-wrap">
             <div class="risk-title">
               «Маркетплейс заблокировал карточку»
@@ -1241,9 +1646,10 @@ a:hover { text-decoration: underline; }
             </div>
             <div class="risk-short">Документы не прошли проверку, жалоба правообладателя</div>
           </div>
-          <div class="risk-toggle">▼</div>
+          <div class="risk-toggle">&#x25BC;</div>
         </div>
         <div class="risk-body">
+          <div class="risk-body-inner">
           <div class="risk-cases">
             <div class="risk-cases-title">Реальные случаи</div>
             <div class="case-item">Сертификат «куплен», но не прошёл проверку Росаккредитации: штраф WB + блокировка. <span class="case-sum">Потери: ~670&nbsp;000 руб.</span></div>
@@ -1256,13 +1662,14 @@ a:hover { text-decoration: underline; }
           <label class="mine-check-wrap" onclick="toggleMine(4)">
             <input type="checkbox" id="mine-4"> Это моя ситуация
           </label>
+          </div>
         </div>
       </div>
 
       <!-- 6 -->
       <div class="risk-card" id="rc-5">
         <div class="risk-card-head" onclick="toggleRisk(5)">
-          <div class="risk-icon">📄</div>
+          <div class="risk-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
           <div class="risk-title-wrap">
             <div class="risk-title">
               «Документы есть, но не те»
@@ -1270,9 +1677,10 @@ a:hover { text-decoration: underline; }
             </div>
             <div class="risk-short">Не на то юрлицо, CE вместо ЕАЭС, нет Честного знака</div>
           </div>
-          <div class="risk-toggle">▼</div>
+          <div class="risk-toggle">&#x25BC;</div>
         </div>
         <div class="risk-body">
+          <div class="risk-body-inner">
           <div class="risk-cases">
             <div class="risk-cases-title">Реальные последствия</div>
             <div class="case-item">Штраф по ст. 14.43 КоАП: <span class="case-sum">до 600&nbsp;000 руб.</span> при первом нарушении, до 1&nbsp;000&nbsp;000 руб. при повторном.</div>
@@ -1285,13 +1693,14 @@ a:hover { text-decoration: underline; }
           <label class="mine-check-wrap" onclick="toggleMine(5)">
             <input type="checkbox" id="mine-5"> Это моя ситуация
           </label>
+          </div>
         </div>
       </div>
 
       <!-- 7 -->
       <div class="risk-card" id="rc-6">
         <div class="risk-card-head" onclick="toggleRisk(6)">
-          <div class="risk-icon">🚢</div>
+          <div class="risk-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/><path d="M2 12h2"/><path d="M20 12h2"/></svg></div>
           <div class="risk-title-wrap">
             <div class="risk-title">
               «Логистика подвела»
@@ -1299,9 +1708,10 @@ a:hover { text-decoration: underline; }
             </div>
             <div class="risk-short">Задержка сезонного товара, повреждение груза, перевозчик-мошенник</div>
           </div>
-          <div class="risk-toggle">▼</div>
+          <div class="risk-toggle">&#x25BC;</div>
         </div>
         <div class="risk-body">
+          <div class="risk-body-inner">
           <div class="risk-cases">
             <div class="risk-cases-title">Реальные случаи</div>
             <div class="case-item">Новогодний декор на 2&nbsp;000&nbsp;000 руб.: прибыл 28 декабря. Продан с дисконтом 60%. <span class="case-sum">Потери: ~1&nbsp;200&nbsp;000 руб.</span></div>
@@ -1314,6 +1724,7 @@ a:hover { text-decoration: underline; }
           <label class="mine-check-wrap" onclick="toggleMine(6)">
             <input type="checkbox" id="mine-6"> Это моя ситуация
           </label>
+          </div>
         </div>
       </div>
 
@@ -1322,9 +1733,9 @@ a:hover { text-decoration: underline; }
 </section>
 
 <!-- ═══════ ЦЕПОЧКА ПОСТАВКИ ═══════ -->
-<section class="section" style="background: var(--bg-soft);">
+<section class="section" id="part-2" style="background: var(--bg-soft);">
   <div class="wrap">
-    <div class="section-label">🔗 Часть 2</div>
+    <div class="section-label"><svg viewBox="0 0 24 24" stroke="var(--accent-light)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Часть 2</div>
     <h2>Где документы «не сходятся»</h2>
     <p class="section-desc">Нажмите на этап цепочки — увидите что проверяется на каждом этапе и где чаще всего возникают проблемы</p>
 
@@ -1332,42 +1743,42 @@ a:hover { text-decoration: underline; }
       <div class="chain" id="supply-chain">
         <div class="chain-node" onclick="showChainNode(0)">
           <button class="chain-node-btn">ПОСТАВЩИК</button>
-          <div class="chain-node-num">①</div>
+          <div class="chain-node-num">01</div>
         </div>
         <div class="chain-arrow">→</div>
         <div class="chain-node" onclick="showChainNode(1)">
           <button class="chain-node-btn">ПРОИЗВОДСТВО</button>
-          <div class="chain-node-num">②</div>
+          <div class="chain-node-num">02</div>
         </div>
         <div class="chain-arrow">→</div>
         <div class="chain-node" onclick="showChainNode(2)">
           <button class="chain-node-btn">ИНСПЕКЦИЯ</button>
-          <div class="chain-node-num">③</div>
+          <div class="chain-node-num">03</div>
         </div>
         <div class="chain-arrow">→</div>
         <div class="chain-node" onclick="showChainNode(3)">
           <button class="chain-node-btn">ЭКСПОРТ КНР</button>
-          <div class="chain-node-num">④</div>
+          <div class="chain-node-num">04</div>
         </div>
         <div class="chain-arrow">→</div>
         <div class="chain-node" onclick="showChainNode(4)">
           <button class="chain-node-btn">ТРАНЗИТ</button>
-          <div class="chain-node-num">⑤</div>
+          <div class="chain-node-num">05</div>
         </div>
         <div class="chain-arrow">→</div>
         <div class="chain-node" onclick="showChainNode(5)">
           <button class="chain-node-btn">ТАМОЖНЯ РФ</button>
-          <div class="chain-node-num">⑥</div>
+          <div class="chain-node-num">06</div>
         </div>
         <div class="chain-arrow">→</div>
         <div class="chain-node" onclick="showChainNode(6)">
           <button class="chain-node-btn">СКЛАД</button>
-          <div class="chain-node-num">⑦</div>
+          <div class="chain-node-num">07</div>
         </div>
         <div class="chain-arrow">→</div>
         <div class="chain-node" onclick="showChainNode(7)">
           <button class="chain-node-btn">МАРКЕТПЛЕЙС</button>
-          <div class="chain-node-num">⑧</div>
+          <div class="chain-node-num">08</div>
         </div>
       </div>
     </div>
@@ -1389,52 +1800,52 @@ a:hover { text-decoration: underline; }
 </section>
 
 <!-- ═══════ СЦЕНАРИИ БАНКОВ И МП ═══════ -->
-<section class="section">
+<section class="section" id="part-3">
   <div class="wrap">
-    <div class="section-label">📋 Часть 3</div>
+    <div class="section-label"><svg viewBox="0 0 24 24" stroke="var(--accent-light)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="15" y2="16"/></svg> Часть 3</div>
     <h2>Что спрашивают банки и маркетплейсы</h2>
     <p class="section-desc">Конкретные сценарии запросов — чтобы вы не узнали о них в момент блокировки</p>
 
     <div class="tabs-nav">
-      <button class="tab-btn active" onclick="switchTab('bank', this)">🏦 Банк</button>
-      <button class="tab-btn" onclick="switchTab('wb', this)">🛍️ Wildberries</button>
-      <button class="tab-btn" onclick="switchTab('ozon', this)">📦 Ozon</button>
+      <button class="tab-btn active" onclick="switchTab('bank', this)">Банк</button>
+      <button class="tab-btn" onclick="switchTab('wb', this)">Wildberries</button>
+      <button class="tab-btn" onclick="switchTab('ozon', this)">Ozon</button>
     </div>
 
     <!-- Банк -->
     <div class="tab-panel active" id="tab-bank">
       <div class="scenario-list">
         <div class="scenario-item">
-          <div class="scenario-head" onclick="toggleScenario(this)">Сценарий А: Первый платёж по контракту <span class="s-toggle">▾</span></div>
-          <div class="scenario-body">
+          <div class="scenario-head" onclick="toggleScenario(this)">Сценарий А: Первый платёж по контракту <span class="s-toggle">&#x25BE;</span></div>
+          <div class="scenario-body"><div class="scenario-body-inner">
             <p>Банк запрашивает:</p>
             <ul>
               <li>Контракт полностью (все приложения, спецификации)</li>
               <li>Инвойс с описанием товара</li>
             </ul>
-          </div>
+          </div></div>
         </div>
         <div class="scenario-item">
-          <div class="scenario-head" onclick="toggleScenario(this)">Сценарий Б: Задержка поставки <span class="s-toggle">▾</span></div>
-          <div class="scenario-body">
+          <div class="scenario-head" onclick="toggleScenario(this)">Сценарий Б: Задержка поставки <span class="s-toggle">&#x25BE;</span></div>
+          <div class="scenario-body"><div class="scenario-body-inner">
             <p>Банк запрашивает: переписку с поставщиком о причинах задержки → доп. соглашение о переносе сроков → претензию к поставщику.</p>
             <p>Срок ответа: 7–15 рабочих дней.</p>
             <div class="s-fine">Штраф при отсутствии документов: 40&nbsp;000–50&nbsp;000 руб. за каждый факт нарушения</div>
-          </div>
+          </div></div>
         </div>
         <div class="scenario-item">
-          <div class="scenario-head" onclick="toggleScenario(this)">Сценарий В: Подозрительная операция (115-ФЗ) <span class="s-toggle">▾</span></div>
-          <div class="scenario-body">
+          <div class="scenario-head" onclick="toggleScenario(this)">Сценарий В: Подозрительная операция (115-ФЗ) <span class="s-toggle">&#x25BE;</span></div>
+          <div class="scenario-body"><div class="scenario-body-inner">
             <p>Банк запрашивает: контракт, инвойс, переписку, источник происхождения средств, объяснение деловой цели.</p>
             <p>Срок рассмотрения: 5–30 дней. Операция может быть заблокирована до выяснения.</p>
-          </div>
+          </div></div>
         </div>
         <div class="scenario-item">
-          <div class="scenario-head" onclick="toggleScenario(this)">Сценарий Г: Нерепатриация валюты <span class="s-toggle">▾</span></div>
-          <div class="scenario-body">
+          <div class="scenario-head" onclick="toggleScenario(this)">Сценарий Г: Нерепатриация валюты <span class="s-toggle">&#x25BE;</span></div>
+          <div class="scenario-body"><div class="scenario-body-inner">
             <p>Товар не поставлен, поставщик не вернул аванс. Банк автоматически фиксирует нарушение.</p>
             <div class="s-fine">Штраф по ст. 15.25 КоАП: 75–100% от суммы незачисленных средств — даже если вы пострадавший</div>
-          </div>
+          </div></div>
         </div>
       </div>
     </div>
@@ -1443,31 +1854,31 @@ a:hover { text-decoration: underline; }
     <div class="tab-panel" id="tab-wb">
       <div class="scenario-list">
         <div class="scenario-item">
-          <div class="scenario-head" onclick="toggleScenario(this)">При загрузке карточки <span class="s-toggle">▾</span></div>
-          <div class="scenario-body">
+          <div class="scenario-head" onclick="toggleScenario(this)">При загрузке карточки <span class="s-toggle">&#x25BE;</span></div>
+          <div class="scenario-body"><div class="scenario-body-inner">
             <p>Обязательно: декларация соответствия или сертификат, внесённые в реестр Росаккредитации (fsa.gov.ru). Маркетплейс проверяет автоматически по номеру документа.</p>
-          </div>
+          </div></div>
         </div>
         <div class="scenario-item">
-          <div class="scenario-head" onclick="toggleScenario(this)">При проверке категории <span class="s-toggle">▾</span></div>
-          <div class="scenario-body">
+          <div class="scenario-head" onclick="toggleScenario(this)">При проверке категории <span class="s-toggle">&#x25BE;</span></div>
+          <div class="scenario-body"><div class="scenario-body-inner">
             <p>WB запрашивает: все документы по карточке + инвойс поставщика. Карточка скрывается на время проверки.</p>
             <div class="s-fine">Период заморозки: 3–45 дней. Товар на складе FBO продолжает генерировать расходы.</div>
-          </div>
+          </div></div>
         </div>
         <div class="scenario-item">
-          <div class="scenario-head" onclick="toggleScenario(this)">При жалобе правообладателя <span class="s-toggle">▾</span></div>
-          <div class="scenario-body">
+          <div class="scenario-head" onclick="toggleScenario(this)">При жалобе правообладателя <span class="s-toggle">&#x25BE;</span></div>
+          <div class="scenario-body"><div class="scenario-body-inner">
             <p>Блокировка за 24–48 часов без предупреждения. Требуется: лицензионный договор или письмо-разрешение от правообладателя.</p>
             <div class="s-fine">Разблокировка: 14–60 дней. Минимальная компенсация по ст. 1301 ГК: 10&nbsp;000 руб. за единицу</div>
-          </div>
+          </div></div>
         </div>
         <div class="scenario-item">
-          <div class="scenario-head" onclick="toggleScenario(this)">Маркировка «Честный знак» <span class="s-toggle">▾</span></div>
-          <div class="scenario-body">
+          <div class="scenario-head" onclick="toggleScenario(this)">Маркировка «Честный знак» <span class="s-toggle">&#x25BE;</span></div>
+          <div class="scenario-body"><div class="scenario-body-inner">
             <p>С 2024 — автоматическая проверка при приёмке на FBO. Коды должны быть нанесены до поступления на склад.</p>
             <div class="s-fine">Без кодов: отказ в приёмке + штраф по ст. 15.12 КоАП</div>
-          </div>
+          </div></div>
         </div>
       </div>
     </div>
@@ -1476,23 +1887,23 @@ a:hover { text-decoration: underline; }
     <div class="tab-panel" id="tab-ozon">
       <div class="scenario-list">
         <div class="scenario-item">
-          <div class="scenario-head" onclick="toggleScenario(this)">При первой поставке <span class="s-toggle">▾</span></div>
-          <div class="scenario-body">
+          <div class="scenario-head" onclick="toggleScenario(this)">При первой поставке <span class="s-toggle">&#x25BE;</span></div>
+          <div class="scenario-body"><div class="scenario-body-inner">
             <p>Ozon запрашивает: декларацию/сертификат соответствия на ваше юрлицо. Проверка через реестр Росаккредитации — автоматически.</p>
-          </div>
+          </div></div>
         </div>
         <div class="scenario-item">
-          <div class="scenario-head" onclick="toggleScenario(this)">При обновлении карточки <span class="s-toggle">▾</span></div>
-          <div class="scenario-body">
+          <div class="scenario-head" onclick="toggleScenario(this)">При обновлении карточки <span class="s-toggle">&#x25BE;</span></div>
+          <div class="scenario-body"><div class="scenario-body-inner">
             <p>Документы могут быть запрошены повторно даже при незначительных изменениях в листинге. Карточка скрывается до подтверждения.</p>
-          </div>
+          </div></div>
         </div>
         <div class="scenario-item">
-          <div class="scenario-head" onclick="toggleScenario(this)">Штрафы по оферте <span class="s-toggle">▾</span></div>
-          <div class="scenario-body">
+          <div class="scenario-head" onclick="toggleScenario(this)">Штрафы по оферте <span class="s-toggle">&#x25BE;</span></div>
+          <div class="scenario-body"><div class="scenario-body-inner">
             <p>При подтверждённом нарушении: удержание из выплат + блокировка аккаунта до выяснения обстоятельств.</p>
             <div class="s-fine">После разблокировки карточка теряет позиции: алгоритм учитывает конверсию за период простоя. Восстановление: 14–45 дней.</div>
-          </div>
+          </div></div>
         </div>
       </div>
     </div>
@@ -1500,16 +1911,16 @@ a:hover { text-decoration: underline; }
 </section>
 
 <!-- ═══════ ЧЕКЛИСТ ═══════ -->
-<section class="section" style="background: var(--bg-soft);">
+<section class="section" id="part-4" style="background: var(--bg-soft);">
   <div class="wrap">
-    <div class="section-label">✅ Часть 4</div>
+    <div class="section-label"><svg viewBox="0 0 24 24" stroke="var(--ok)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Часть 4</div>
     <h2>Чеклист готовности</h2>
     <p class="section-desc">Отметьте то, что уже сделано — прогресс сохраняется автоматически</p>
 
     <div class="checklist-groups">
 
       <div class="checklist-group">
-        <div class="checklist-group-title">💰 До первой оплаты поставщику <span class="group-count" id="gc-0">0/4</span></div>
+        <div class="checklist-group-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--warn)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> До первой оплаты поставщику <span class="group-count" id="gc-0">0/4</span></div>
         <div class="check-items" id="cg-0">
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c0"> <span class="check-text">Проверить юрлицо поставщика в реестре gsxt.gov.cn (название, дата регистрации, статус)</span></label>
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c1"> <span class="check-text">Убедиться, что scope деятельности в Business License включает производство, а не только торговлю (проверяется, только если поставщик заявил, что является производителем)</span></label>
@@ -1519,7 +1930,7 @@ a:hover { text-decoration: underline; }
       </div>
 
       <div class="checklist-group">
-        <div class="checklist-group-title">🏭 До начала производства <span class="group-count" id="gc-1">0/3</span></div>
+        <div class="checklist-group-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M9 20V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v14"/><path d="M4 20v-4a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4"/><path d="M14 20v-8a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v8"/></svg> До начала производства <span class="group-count" id="gc-1">0/3</span></div>
         <div class="check-items" id="cg-1">
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c4"> <span class="check-text">Подписан Tech Pack / Product Specification Sheet с допусками на все параметры</span></label>
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c5"> <span class="check-text">Golden Sample — эталонный образец с подписью и печатью, хранится у обеих сторон</span></label>
@@ -1528,7 +1939,7 @@ a:hover { text-decoration: underline; }
       </div>
 
       <div class="checklist-group">
-        <div class="checklist-group-title">🚢 До отгрузки из Китая <span class="group-count" id="gc-2">0/4</span></div>
+        <div class="checklist-group-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M2 12h2"/><path d="M20 12h2"/></svg> До отгрузки из Китая <span class="group-count" id="gc-2">0/4</span></div>
         <div class="check-items" id="cg-2">
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c7"> <span class="check-text">Pre-Shipment Inspection (PSI) — акт независимой инспекционной компании (SGS, Bureau Veritas, CCIC, QIMA) либо отправка инспектора на фабрику до отгрузки. Стоимость: $300–500</span></label>
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c8"> <span class="check-text">Полный пакет документов: коносамент/авианакладная/CMR → коммерческий инвойс → упаковочный лист → экспортная декларация</span></label>
@@ -1538,7 +1949,7 @@ a:hover { text-decoration: underline; }
       </div>
 
       <div class="checklist-group">
-        <div class="checklist-group-title">🛃 До таможенного оформления <span class="group-count" id="gc-3">0/5</span></div>
+        <div class="checklist-group-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> До таможенного оформления <span class="group-count" id="gc-3">0/5</span></div>
         <div class="check-items" id="cg-3">
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c12"> <span class="check-text">Правильный код ТН ВЭД — при сомнении: предварительное классификационное решение ФТС (бесплатно, срок до 60 дней)</span></label>
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c13"> <span class="check-text">Таможенная стоимость = реальной стоимости сделки (соответствие платёжных документов инвойсу)</span></label>
@@ -1549,7 +1960,7 @@ a:hover { text-decoration: underline; }
       </div>
 
       <div class="checklist-group">
-        <div class="checklist-group-title">🛒 До листинга на маркетплейсе <span class="group-count" id="gc-4">0/5</span></div>
+        <div class="checklist-group-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> До листинга на маркетплейсе <span class="group-count" id="gc-4">0/5</span></div>
         <div class="check-items" id="cg-4">
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c17"> <span class="check-text">Декларация/сертификат соответствия оформлены на ваше юрлицо (не на поставщика, не на третью компанию)</span></label>
           <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" data-key="c18"> <span class="check-text">Документ внесён в реестр Росаккредитации (fsa.gov.ru) — маркетплейс проверяет автоматически</span></label>
@@ -1564,9 +1975,9 @@ a:hover { text-decoration: underline; }
 </section>
 
 <!-- ═══════ СКОР ═══════ -->
-<section class="section">
+<section class="section" id="section-score">
   <div class="wrap">
-    <div class="section-label">📊 Итог</div>
+    <div class="section-label"><svg viewBox="0 0 24 24" stroke="var(--accent-light)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Итог</div>
     <h2>Ваш уровень готовности</h2>
     <p class="section-desc">Рассчитывается автоматически на основе чеклиста выше</p>
 
@@ -1606,14 +2017,14 @@ a:hover { text-decoration: underline; }
    ДАННЫЕ ЦЕПОЧКИ ПОСТАВКИ
 ═══════════════════════════════════════ */
 const CHAIN_DATA = [
-  { title: '① Поставщик', checks: 'Юрлицо, лицензии, экспортная лицензия', problem: 'Торговая компания вместо производителя; фиктивная компания' },
-  { title: '② Производство', checks: 'Соответствие образцу, материалы, технология', problem: 'Подмена материалов без уведомления в серийной партии' },
-  { title: '③ Инспекция', checks: 'Инспекционный акт, соответствие спецификации', problem: 'Инспекция пропущена → нет документальных оснований для претензии' },
-  { title: '④ Экспорт КНР', checks: 'Экспортная декларация Китая', problem: 'Покупные документы для экспорта → отсутствует экспортная декларация' },
-  { title: '⑤ Транзит / Логистика', checks: 'Страховка, договор перевозки', problem: 'Ответственность перевозчика ≠ реальная стоимость товара' },
-  { title: '⑥ Таможня РФ', checks: 'ТН ВЭД, таможенная стоимость, разрешительные документы', problem: 'Неверный код → доначисление; занижение стоимости → КТС и доначисление' },
-  { title: '⑦ Склад / Маркировка', checks: '«Честный знак», маркировка на русском', problem: 'Отсутствие кодов до отгрузки из Китая' },
-  { title: '⑧ Маркетплейс', checks: 'Декларации, сертификаты, права на товарный знак', problem: '«Купленные» документы не проходят проверку реестра Росаккредитации' },
+  { title: '01 Поставщик', checks: 'Юрлицо, лицензии, экспортная лицензия', problem: 'Торговая компания вместо производителя; фиктивная компания' },
+  { title: '02 Производство', checks: 'Соответствие образцу, материалы, технология', problem: 'Подмена материалов без уведомления в серийной партии' },
+  { title: '03 Инспекция', checks: 'Инспекционный акт, соответствие спецификации', problem: 'Инспекция пропущена → нет документальных оснований для претензии' },
+  { title: '04 Экспорт КНР', checks: 'Экспортная декларация Китая', problem: 'Покупные документы для экспорта → отсутствует экспортная декларация' },
+  { title: '05 Транзит / Логистика', checks: 'Страховка, договор перевозки', problem: 'Ответственность перевозчика ≠ реальная стоимость товара' },
+  { title: '06 Таможня РФ', checks: 'ТН ВЭД, таможенная стоимость, разрешительные документы', problem: 'Неверный код → доначисление; занижение стоимости → КТС и доначисление' },
+  { title: '07 Склад / Маркировка', checks: '«Честный знак», маркировка на русском', problem: 'Отсутствие кодов до отгрузки из Китая' },
+  { title: '08 Маркетплейс', checks: 'Декларации, сертификаты, права на товарный знак', problem: '«Купленные» документы не проходят проверку реестра Росаккредитации' },
 ];
 
 /* ═══════════════════════════════════════
@@ -1664,8 +2075,6 @@ function toggleRisk(idx) {
 function toggleMine(idx) {
   const cb   = document.getElementById('mine-' + idx);
   const card = document.getElementById('rc-' + idx);
-  // Состояние cb уже переключилось (лейбл кликнули)
-  // Используем setTimeout чтобы прочитать после события
   setTimeout(() => {
     if (cb.checked) {
       card.classList.add('is-mine');
@@ -1704,6 +2113,14 @@ function showChainNode(idx) {
   prob.textContent   = data.problem;
   popup.classList.add('visible');
 }
+
+document.addEventListener('click', function(e) {
+  if (activeChainNode === -1) return;
+  if (e.target.closest('.chain-node') || e.target.closest('#chain-popup')) return;
+  document.querySelectorAll('#supply-chain .chain-node').forEach(n => n.classList.remove('active'));
+  document.getElementById('chain-popup').classList.remove('visible');
+  activeChainNode = -1;
+});
 
 /* ═══════════════════════════════════════
    ТАБЫ
@@ -1778,9 +2195,9 @@ function updateProgress() {
 
   // Цвет gauge
   let col;
-  if (pct <= 30)       col = '#e53935';
-  else if (pct <= 70)  col = '#f57c00';
-  else                 col = '#2e7d32';
+  if (pct <= 30)       col = 'hsl(4 80% 58%)';
+  else if (pct <= 70)  col = 'hsl(32 90% 55%)';
+  else                 col = 'hsl(142 50% 45%)';
   arc.style.stroke = col;
 
   document.getElementById('gauge-pct-text').textContent = pct + '%';
@@ -1794,13 +2211,13 @@ function updateProgress() {
     statusEl.textContent = 'Начните с чеклиста выше';
     descEl.textContent   = 'Отметьте выполненные пункты — здесь появится ваша оценка готовности к импорту без потерь.';
   } else if (pct <= 30) {
-    statusEl.textContent = '🔴 Зона высокого риска';
+    statusEl.textContent = 'Зона высокого риска';
     descEl.textContent   = 'Большинство точек потерь не закрыты. Каждая поставка — это неконтролируемый риск. Рекомендуем системный подход.';
   } else if (pct <= 70) {
-    statusEl.textContent = '🟡 Частичная готовность';
+    statusEl.textContent = 'Частичная готовность';
     descEl.textContent   = 'Есть прогресс, но критические зоны остаются открытыми. Одна непредвиденная ситуация может перечеркнуть результат нескольких поставок.';
   } else {
-    statusEl.textContent = '🟢 Хорошая готовность';
+    statusEl.textContent = 'Хорошая готовность';
     descEl.textContent   = 'Основные риски под контролем. Следующий шаг — выстроить систему так, чтобы контроль не зависел от вашего ручного участия в каждой сделке.';
   }
 }
@@ -1810,14 +2227,27 @@ function updateProgress() {
 ═══════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function() {
   loadChecks();
+
+  // Generate background particles
+  var particlesEl = document.getElementById('bg-particles');
+  if (particlesEl) {
+    for (var i = 0; i < 15; i++) {
+      var span = document.createElement('span');
+      span.style.left = (Math.random() * 100) + '%';
+      span.style.width = span.style.height = (2 + Math.random() * 2) + 'px';
+      span.style.animationDuration = (15 + Math.random() * 15) + 's';
+      span.style.animationDelay = (Math.random() * 15) + 's';
+      particlesEl.appendChild(span);
+    }
+  }
 });
 
 
 /* ── Scroll-reveal (Intersection Observer) ── */
 (function(){
-  const els = document.querySelectorAll('.section, .risk-card, .personalize-card, .cta-box, .score-section-bg, .chain-wrap, .checklist-groups');
+  var els = document.querySelectorAll('.section, .risk-card, .personalize-card, .cta-box, .score-section-bg, .chain-wrap, .checklist-groups');
   if(!els.length) return;
-  const observer = new IntersectionObserver(function(entries){
+  var observer = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if(entry.isIntersecting){
         entry.target.classList.add('reveal', 'visible');
@@ -1827,20 +2257,32 @@ document.addEventListener('DOMContentLoaded', function() {
   }, { threshold: 0.08 });
   els.forEach(function(el, i){
     el.classList.add('reveal');
-    if(i % 3 === 1) el.classList.add('reveal-delay-1');
-    if(i % 3 === 2) el.classList.add('reveal-delay-2');
+    if(i % 4 === 1) el.classList.add('reveal-delay-1');
+    if(i % 4 === 2) el.classList.add('reveal-delay-2');
+    if(i % 4 === 3) el.classList.add('reveal-delay-3');
     observer.observe(el);
   });
 })();
 
-/* ── Параллакс hero ── */
+/* ── Parts Nav Active State (IntersectionObserver) ── */
 (function(){
-  const hero = document.querySelector('.hero');
-  if(!hero) return;
-  window.addEventListener('scroll', function(){
-    var offset = window.scrollY;
-    hero.style.backgroundPosition = '50% ' + (offset * 0.25) + 'px';
-  }, { passive: true });
+  var navItems = document.querySelectorAll('.parts-nav-item');
+  var sections = document.querySelectorAll('#part-1, #part-2, #part-3, #part-4');
+  if (!sections.length || !navItems.length) return;
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var id = entry.target.id;
+        var partNum = id.replace('part-', '');
+        navItems.forEach(function(item) {
+          item.classList.toggle('active', item.getAttribute('data-part') === partNum);
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(function(s) { observer.observe(s); });
 })();
 
 /* ── Pulse на score при обновлении ── */
