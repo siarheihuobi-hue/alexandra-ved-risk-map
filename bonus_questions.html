@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Можно ли ему доверять? — WhiteWayChina</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+:root {
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --bg:            hsl(225 20% 7%);
+  --bg-soft:       hsl(225 18% 10%);
+  --bg-elevated:   hsl(225 16% 13%);
+  --bg-glass:      rgba(255, 255, 255, 0.04);
+
+  --text:          #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  --muted:         rgba(255, 255, 255, 0.45);
+
+  --border:        rgba(255, 255, 255, 0.08);
+  --border-hover:  rgba(255, 255, 255, 0.15);
+
+  --accent:        hsl(228 70% 55%);
+  --accent-dark:   hsl(228 70% 45%);
+  --accent-light:  hsl(228 80% 70%);
+  --accent-glow:   hsla(228 80% 60% / 0.25);
+  --accent-bg:     hsla(228 70% 55% / 0.08);
+
+  --gold:          hsl(43 85% 47%);
+  --gold-light:    hsl(43 90% 60%);
+  --gold-glow:     hsla(43 85% 47% / 0.25);
+  --gradient-gold: linear-gradient(135deg, #c8940f, #f0c040, #c8940f);
+
+  --shadow-sm:     0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md:     0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg:     0 8px 48px rgba(0, 0, 0, 0.5);
+  --shadow-glow:   0 0 40px var(--accent-glow);
+
+  --radius:        14px;
+  --radius-sm:     10px;
+  --radius-lg:     20px;
+
+  --trans:         0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --trans-bounce:  0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --col:           800px;
+
+  --gradient-hero: linear-gradient(135deg, hsl(225 25% 8%) 0%, hsl(228 30% 12%) 25%, hsl(240 20% 10%) 50%, hsl(220 25% 9%) 75%, hsl(225 25% 8%) 100%);
+  --gradient-accent: linear-gradient(135deg, hsl(228 70% 50%), hsl(250 60% 55%));
+}
+
+/* ═══════════════════════════════════════
+   NOISE TEXTURE OVERLAY
+═══════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+}
+
+/* ═══════════════════════════════════════
+   FLOATING ORBS
+═══════════════════════════════════════ */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+  z-index: 0;
+  opacity: 0;
+  animation: orbFadeIn 2s ease forwards;
+}
+
+.orb-1 {
+  width: 500px; height: 500px;
+  background: hsla(228 80% 55% / 0.08);
+  top: -100px; right: -150px;
+  animation-delay: 0.5s;
+}
+
+.orb-2 {
+  width: 400px; height: 400px;
+  background: hsla(250 60% 50% / 0.06);
+  bottom: 10%; left: -120px;
+  animation-delay: 1.2s;
+}
+
+@keyframes orbFadeIn {
+  to { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+
+body {
+  overflow-x: hidden;
+  overflow-wrap: anywhere;
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════════════
+   PAGE CONTAINER
+═══════════════════════════════════════ */
+.page {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 60px 48px 48px;
+  position: relative;
+  counter-reset: q;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════
+   COVER / HERO
+═══════════════════════════════════════ */
+.cover {
+  text-align: center;
+  padding: 48px 32px 56px;
+  margin-bottom: 48px;
+  position: relative;
+  border-bottom: none;
+  background: var(--gradient-hero);
+  background-size: 300% 300%;
+  animation: gradientShift 12s ease infinite;
+  border-radius: var(--radius-lg);
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.logo-line {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 32px;
+  font-family: var(--font-display);
+}
+
+.cover h1 {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 16px;
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.cover h1 span {
+  background: linear-gradient(135deg, var(--accent-light), var(--accent), hsl(250 70% 65%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cover .subtitle {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  font-family: var(--font-display);
+}
+
+.cover .lead {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+}
+
+/* ═══════════════════════════════════════
+   PRINT BUTTON — gold gradient + shimmer
+═══════════════════════════════════════ */
+.print-btn {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 44px;
+  padding: 14px 36px;
+  background: var(--gradient-gold);
+  color: #000;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--trans);
+  box-shadow: 0 4px 20px var(--gold-glow);
+  min-height: 44px;
+}
+
+.print-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px var(--gold-glow);
+}
+
+.print-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { left: -100%; }
+  50% { left: 150%; }
+}
+
+/* ═══════════════════════════════════════
+   BLOCKS — glassmorphism cards
+═══════════════════════════════════════ */
+.block {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 28px 20px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color var(--trans), box-shadow var(--trans);
+  /* scroll reveal init */
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.block.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.block:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md), 0 0 30px var(--accent-glow);
+}
+
+.block.visible:hover {
+  transform: translateY(-4px);
+}
+
+/* Top accent line on each block */
+.block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
+  opacity: 0.3;
+}
+
+/* Staggered reveal delays */
+.block:nth-child(1) { transition-delay: 0s; }
+.block:nth-child(2) { transition-delay: 0.08s; }
+.block:nth-child(3) { transition-delay: 0.16s; }
+.block:nth-child(4) { transition-delay: 0.24s; }
+.block:nth-child(5) { transition-delay: 0.32s; }
+
+/* ═══════════════════════════════════════
+   BLOCK TITLE
+═══════════════════════════════════════ */
+.block-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 20px;
+  font-family: var(--font-display);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.block-title::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 18px;
+  background: var(--gradient-accent);
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--accent-glow);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════
+   QUESTION LIST
+═══════════════════════════════════════ */
+ol {
+  padding-left: 0;
+  list-style: none;
+}
+
+ol li {
+  counter-increment: q;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  transition: all var(--trans);
+  min-height: 44px;
+}
+
+ol li:last-child {
+  margin-bottom: 0;
+}
+
+ol li:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+}
+
+ol li::before {
+  content: counter(q);
+  min-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: var(--font-display);
+  color: #fff;
+  background: var(--gradient-accent);
+  border-radius: 8px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px var(--accent-glow);
+  margin-top: 1px;
+}
+
+/* ═══════════════════════════════════════
+   GRADIENT DIVIDERS between blocks
+═══════════════════════════════════════ */
+.block-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+  border: none;
+  margin: 0 0 16px;
+}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+.footer {
+  margin-top: 56px;
+  padding-top: 28px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-hover), transparent);
+}
+
+.footer-author {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.footer-author strong {
+  display: block;
+  font-size: 15px;
+  color: var(--text);
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.footer-workshop {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════
+   PRINT STYLES
+═══════════════════════════════════════ */
+@media print {
+  body { background: #fff; color: #1c1c1c; }
+  body::before { display: none; }
+  .orb { display: none; }
+  .page { margin: 0; padding: 40px 48px; }
+  .print-btn { display: none; }
+  .cover { background: none; animation: none; }
+  .cover h1 span { -webkit-text-fill-color: #597dee; color: #597dee; }
+  .cover h1 { color: #1c1c1c; }
+  .cover .subtitle, .cover .lead { color: #555; }
+  .logo-line { color: #597dee; }
+  .cover::after { background: #597dee; }
+  .block { opacity: 1; transform: none; background: #f8f9ff; border-color: #e0e4f0; box-shadow: none; backdrop-filter: none; page-break-inside: avoid; }
+  .block:hover { transform: none; box-shadow: none; }
+  .block::before { display: none; }
+  .block-title { color: #597dee; }
+  .block-title::before { background: #597dee; box-shadow: none; }
+  ol li { color: #1c1c1c; }
+  ol li:hover { background: none; }
+  ol li::before { background: #597dee; box-shadow: none; }
+  .block-divider { background: #e0e4f0; }
+  .footer::before { background: #e0e0e0; }
+  .footer-author { color: #555; }
+  .footer-author strong { color: #1c1c1c; }
+  .footer-workshop { color: #888; }
+}
+
+/* ═══════════════════════════════════════
+   TABLET (max-width: 900px)
+═══════════════════════════════════════ */
+@media (max-width: 900px) {
+  .page { padding: 48px 32px; }
+  .cover h1 { font-size: 30px; }
+}
+
+/* ═══════════════════════════════════════
+   MOBILE (max-width: 640px)
+═══════════════════════════════════════ */
+@media (max-width: 640px) {
+  .page { padding: 32px 20px 32px; }
+  .cover { padding: 32px 16px 40px; }
+  .cover h1 { font-size: 26px; }
+  .cover .subtitle { font-size: 15px; }
+  .cover .lead { font-size: 14px; }
+  .block { padding: 20px 20px 16px; }
+  ol li { gap: 10px; padding: 8px 8px; font-size: 14px; }
+  ol li::before { min-width: 28px; height: 28px; font-size: 12px; border-radius: 6px; }
+  .footer { flex-direction: column; align-items: flex-start; }
+  .footer-workshop { text-align: left; }
+  .print-btn { padding: 12px 28px; font-size: 14px; }
+  .orb-1 { width: 300px; height: 300px; }
+  .orb-2 { width: 250px; height: 250px; }
+}
+
+/* ═══════════════════════════════════════
+   REDUCED MOTION
+═══════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .orb { display: none; }
+  .cover { animation: none; }
+  .print-btn::after { animation: none; }
+  .block { opacity: 1; transform: none; transition: border-color var(--trans), box-shadow var(--trans); }
+  @keyframes shimmer { 0%, 100% { left: -100%; } }
+  @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } }
+}
+</style>
+</head>
+<body>
+
+<!-- Floating orbs -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<div class="page">
+
+  <div class="cover">
+    <div class="logo-line">WhiteWayChina · Александра Шумилова</div>
+    <h1>Можно ли ему<br><span>доверять?</span></h1>
+    <div class="subtitle">20 вопросов для проверки агента и логиста</div>
+    <p class="lead">Задайте их на следующем созвоне или в переписке. Ответы покажут — не по ощущениям, а по конкретным фактам. Как интерпретировать ответы — разберём на воркшопе.</p>
+  </div>
+
+  <button class="print-btn" onclick="window.print()">Сохранить как PDF</button>
+
+  <div class="block">
+    <div class="block-title">Схема работы</div>
+    <ol>
+      <li>Как именно вы оформляете экспорт из Китая? Через какое юрлицо?</li>
+      <li>Какие документы я получу на руки по итогам поставки?</li>
+      <li>Вы работаете напрямую с производителем или через субподрядчиков?</li>
+      <li>Можете показать пример договора, по которому мы будем работать?</li>
+    </ol>
+  </div>
+
+  <hr class="block-divider">
+
+  <div class="block">
+    <div class="block-title">Документы</div>
+    <ol>
+      <li>Таможенная декларация — вы её предоставите?</li>
+      <li>Экспортная декларация из Китая — вы её предоставляете?</li>
+      <li>Если вес и стоимость товара не совпадут в экспортной и импортной декларациях — кто несёт ответственность?</li>
+      <li>Какой документ подтверждает оплату поставщику?</li>
+    </ol>
+  </div>
+
+  <hr class="block-divider">
+
+  <div class="block">
+    <div class="block-title">Ответственность</div>
+    <ol>
+      <li>Что происходит, если таможня задержит или арестует груз? Кто несёт расходы?</li>
+      <li>Если налоговая запросит документы по этой поставке — что именно я смогу им предоставить?</li>
+      <li>Если возникнут претензии по качеству товара — к кому я обращаюсь и каков порядок?</li>
+      <li>Кто будет импортёром по документам?</li>
+    </ol>
+  </div>
+
+  <hr class="block-divider">
+
+  <div class="block">
+    <div class="block-title">Цена и себестоимость</div>
+    <ol>
+      <li>Из чего конкретно складывается ваша ставка? Разбейте по статьям.</li>
+      <li>Какие расходы могут появиться дополнительно после подписания договора?</li>
+      <li>Таможенные платежи входят в ставку? Если да, можете ли вы их расписать?</li>
+      <li>Комиссия финансового агента за перевод — она включена или добавляется сверху?</li>
+    </ol>
+  </div>
+
+  <hr class="block-divider">
+
+  <div class="block">
+    <div class="block-title">Прозрачность</div>
+    <ol>
+      <li>Я получу транспортную накладную на моё имя?</li>
+      <li>Где происходит таможенное оформление товара?</li>
+      <li>Вы можете дать контакт вашего таможенного брокера?</li>
+      <li>Были ли у вас случаи доначислений или штрафов от таможни или налоговой? Как решали?</li>
+    </ol>
+  </div>
+
+  <div class="footer">
+    <div class="footer-author">
+      <strong>Александра Шумилова</strong>
+      Эксперт по ВЭД с Китаем · WhiteWayChina
+    </div>
+    <div class="footer-workshop">
+      Воркшоп «Неуправляемый импорт — увидеть реальность»<br>
+      11 апреля · Zoom · бесплатно
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Scroll reveal for blocks
+(function() {
+  var els = document.querySelectorAll('.block');
+  if (!els.length) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach(function(el) { el.classList.add('visible'); });
+    return;
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  els.forEach(function(el) { observer.observe(el); });
+})();
+</script>
+
+</body>
+</html>
