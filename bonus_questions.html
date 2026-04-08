@@ -210,6 +210,30 @@ body {
 }
 
 /* ═══════════════════════════════════════
+   BACK LINK
+═══════════════════════════════════════ */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-light);
+  text-decoration: none;
+  margin-bottom: 40px;
+  transition: all var(--trans);
+  letter-spacing: 0.02em;
+  padding: 10px 0;
+  min-height: 44px;
+}
+.back-link:hover { opacity: 0.7; text-decoration: none; }
+.back-link svg {
+  width: 16px; height: 16px;
+  stroke: currentColor; fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* ═══════════════════════════════════════
    PRINT BUTTON — gold gradient + shimmer
 ═══════════════════════════════════════ */
 .print-btn {
@@ -447,7 +471,7 @@ ol li::before {
   body::before { display: none; }
   .orb { display: none; }
   .page { margin: 0; padding: 40px 48px; }
-  .print-btn { display: none; }
+  .print-btn, .back-link { display: none; }
   .cover { background: none; animation: none; }
   .cover h1 span { -webkit-text-fill-color: #597dee; color: #597dee; }
   .cover h1 { color: #1c1c1c; }
@@ -516,6 +540,11 @@ ol li::before {
 <div class="orb orb-2"></div>
 
 <div class="page">
+
+  <a href="/bonuses/" class="back-link">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+    Все материалы
+  </a>
 
   <div class="cover">
     <div class="logo-line">WhiteWayChina · Александра Шумилова</div>
