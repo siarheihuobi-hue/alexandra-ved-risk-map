@@ -419,6 +419,84 @@ ol li::before {
 }
 
 /* ═══════════════════════════════════════
+   NEXT STEP CTA
+═══════════════════════════════════════ */
+.next-step {
+  margin-top: 52px;
+  padding: 36px 32px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 60px hsla(228, 70%, 55%, 0.15);
+}
+.next-step::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, hsl(228 80% 70%), transparent);
+  opacity: 0.4;
+}
+.next-step h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+  font-family: var(--font-display);
+}
+.next-step p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.75;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+.next-step a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #c8940f 0%, #f0c040 50%, #c8940f 100%);
+  color: #000;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  font-family: var(--font-display);
+  box-shadow: 0 4px 20px hsla(43, 85%, 47%, 0.25);
+  min-height: 44px;
+  position: relative;
+  overflow: hidden;
+}
+.next-step a::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%, 100% { left: -100%; }
+  50% { left: 150%; }
+}
+.next-step a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px hsla(43, 85%, 47%, 0.35);
+}
+.next-step a svg {
+  width: 16px; height: 16px;
+  stroke: currentColor; fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* ═══════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════ */
 .footer {
@@ -611,6 +689,15 @@ ol li::before {
       <li>Вы можете дать контакт вашего таможенного брокера?</li>
       <li>Были ли у вас случаи доначислений или штрафов от таможни или налоговой? Как решали?</li>
     </ol>
+  </div>
+
+  <div class="next-step">
+    <h2>Готовы перейти от проверок к системе?</h2>
+    <p>Эти 20 вопросов — первый шаг. Дальше — работа с экспертом, который уже прошёл этот путь с 200+ клиентами. Узнайте, как устроена Система Контролируемого Импорта.</p>
+    <a href="https://t.me/AShumilova_bot" target="_blank" rel="noopener noreferrer">
+      Написать Александре
+      <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
   </div>
 
   <div class="footer">
