@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Карта рисков слепого импорта 2026 — WhiteWayChina</title>
+<title>Карта рисков неуправляемого импорта 2026 — WhiteWayChina</title>
 <link rel="icon" type="image/png" href="img/favicon.png">
 <meta name="description" content="Интерактивная карта точек потерь при импорте из Китая. Персонализированный инструмент диагностики для предпринимателей.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -186,20 +186,6 @@ a:hover { text-decoration: underline; }
   width: 0%;
 }
 
-.btn-pdf {
-  padding: 7px 14px;
-  border-radius: 8px;
-  border: 1.5px solid var(--border);
-  background: transparent;
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--muted);
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all var(--trans);
-}
-.btn-pdf:hover { border-color: var(--accent); color: var(--accent); }
 
 /* ═══════════════════════════════════════
    HERO
@@ -1035,7 +1021,7 @@ a:hover { text-decoration: underline; }
    PRINT
 ═══════════════════════════════════════ */
 @media print {
-  .site-header, .btn-pdf, .risk-toggle,
+  .site-header, .risk-toggle,
   .mine-check-wrap, .chain-node-btn,
   .tab-btn, .btn-cta { display: none !important; }
 
@@ -1069,7 +1055,7 @@ a:hover { text-decoration: underline; }
       <img src="img/logo.svg" alt="WhiteWayChina" style="height:36px;display:block;">
     </a>
     <div class="header-progress">
-      <span class="progress-label">Готовность: <strong id="hdr-count">0/22</strong></span>
+      <span class="progress-label">Готовность: <strong id="hdr-count">0/21</strong></span>
       <div class="progress-bar-wrap">
         <div class="progress-bar-fill" id="hdr-bar"></div>
       </div>
@@ -1080,7 +1066,7 @@ a:hover { text-decoration: underline; }
 <!-- ═══════ HERO ═══════ -->
 <div id="top"></div>
 <section class="hero">
-  <h1 class="fade-up delay-1">Карта рисков <em>слепого импорта</em> 2026</h1>
+  <h1 class="fade-up delay-1">Карта рисков <em>неуправляемого импорта</em> 2026</h1>
   <p class="hero-sub fade-up delay-2">Структурированная карта точек, где деньги уходят тихо — до того, как вы успеваете это заметить</p>
   <p class="hero-desc fade-up delay-3">Это не общая памятка. Это ваш персональный инструмент диагностики. Заполните один раз — получите картину рисков конкретно под ваш бизнес.</p>
 </section>
@@ -1223,7 +1209,7 @@ a:hover { text-decoration: underline; }
               «Банк заблокировал платёж»
               <span class="risk-badge danger">Высокий</span>
             </div>
-            <div class="risk-short">115-ФЗ, нерепатриация, зависший перевод через посредников</div>
+            <div class="risk-short">115-ФЗ, нерепатриация, зависший перевод через платёжных агентов</div>
           </div>
           <div class="risk-toggle">▼</div>
         </div>
@@ -1236,7 +1222,7 @@ a:hover { text-decoration: underline; }
             <div class="case-item">Платёжный агент-мошенник: 100% от суммы перевода.</div>
           </div>
           <div class="mechanism-box">
-            <b>Механизм потери:</b> После санкций большинство крупных китайских банков ограничили транзакции с Россией. Юаневые переводы с декабря 2023 всё чаще отклоняются. Предприниматели работают через цепочки посредников.
+            <b>Механизм потери:</b> После санкций большинство крупных китайских банков ограничили транзакции с Россией. Юаневые переводы с декабря 2023 всё чаще отклоняются. Предприниматели работают через цепочки платёжных агентов.
           </div>
           <label class="mine-check-wrap" onclick="toggleMine(3)">
             <input type="checkbox" id="mine-3"> Это моя ситуация
@@ -1516,7 +1502,7 @@ a:hover { text-decoration: underline; }
 <!-- ═══════ ЧЕКЛИСТ ═══════ -->
 <section class="section" style="background: var(--bg-soft);">
   <div class="wrap">
-    <div class="section-label">✅ Часть 4 — Чеклист готовности</div>
+    <div class="section-label">✅ Часть 4</div>
     <h2>Чеклист готовности</h2>
     <p class="section-desc">Отметьте то, что уже сделано — прогресс сохраняется автоматически</p>
 
@@ -1605,22 +1591,13 @@ a:hover { text-decoration: underline; }
         <p>Возвращайтесь сюда, когда начинаете новую партию. Карта работает лучше, когда вы заполняете её под конкретный товар и поставщика — не в общем, а под вашу реальную схему.</p>
       </div>
 
-      <!-- Demo popup -->
-      <div id="demo-overlay" onclick="hideDemoNote()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:999;align-items:center;justify-content:center;">
-        <div onclick="event.stopPropagation()" style="background:#fff;border-radius:16px;padding:32px 28px;max-width:420px;width:90%;text-align:left;box-shadow:0 8px 40px rgba(0,0,0,0.18);">
-          <div style="font-size:22px;margin-bottom:12px;">👆 Это демо-версия</div>
-          <p style="font-size:15px;line-height:1.6;color:#1c1c1c;margin-bottom:10px;"><strong>В рабочей версии</strong> эта кнопка переводит пользователя на страницу оффера флагманского курса.</p>
-          <p style="font-size:14px;color:#555;line-height:1.6;margin-bottom:20px;">Логика воронки: участник проходит чеклист → видит свои риски → понимает, что нужна система → переходит на оффер флагмана и оформляет участие.</p>
-          <button onclick="hideDemoNote()" style="padding:10px 24px;border-radius:8px;border:none;background:#597dee;color:#fff;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;">Понятно</button>
-        </div>
-      </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════ FOOTER ═══════ -->
 <footer class="site-footer">
-  <p>Карта составлена на основе анализа реальных случаев: vc.ru, ВЭД-сообщества, арбитражные решения (kad.arbitr.ru), данные QIMA, FBI IC3, публикации ФТС. Актуально: февраль 2026.</p>
+  <p>Карта составлена на основе анализа реальных случаев: vc.ru, ВЭД-сообщества, арбитражные решения (kad.arbitr.ru), данные QIMA, FBI IC3, публикации ФТС. Актуально: апрель 2026.</p>
   <p style="margin-top:8px;">© 2026 WhiteWayChina · Александра Шумилова · <a href="https://t.me/shumilovachina">@shumilovachina</a></p>
 </footer>
 
@@ -1629,7 +1606,7 @@ a:hover { text-decoration: underline; }
    ДАННЫЕ ЦЕПОЧКИ ПОСТАВКИ
 ═══════════════════════════════════════ */
 const CHAIN_DATA = [
-  { title: '① Поставщик', checks: 'Юрлицо, лицензии, экспортная лицензия', problem: 'Посредник вместо производителя; фиктивная компания' },
+  { title: '① Поставщик', checks: 'Юрлицо, лицензии, экспортная лицензия', problem: 'Торговая компания вместо производителя; фиктивная компания' },
   { title: '② Производство', checks: 'Соответствие образцу, материалы, технология', problem: 'Подмена материалов без уведомления в серийной партии' },
   { title: '③ Инспекция', checks: 'Инспекционный акт, соответствие спецификации', problem: 'Инспекция пропущена → нет документальных оснований для претензии' },
   { title: '④ Экспорт КНР', checks: 'Экспортная декларация Китая', problem: 'Покупные документы для экспорта → отсутствует экспортная декларация' },
@@ -1835,14 +1812,6 @@ document.addEventListener('DOMContentLoaded', function() {
   loadChecks();
 });
 
-function showDemoNote() {
-  const el = document.getElementById('demo-overlay');
-  el.style.display = 'flex';
-}
-
-function hideDemoNote() {
-  document.getElementById('demo-overlay').style.display = 'none';
-}
 
 /* ── Scroll-reveal (Intersection Observer) ── */
 (function(){
